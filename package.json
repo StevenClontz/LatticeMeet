@@ -29,10 +29,12 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@codemirror/lang-markdown": "github:codemirror/lang-markdown",
 		"@supabase/auth-helpers-sveltekit": "^0.10.4",
 		"@supabase/auth-ui-shared": "^0.1.8",
 		"@supabase/auth-ui-svelte": "^0.2.7",
 		"@supabase/supabase-js": "^2.38.4",
+		"rehype-katex": "^7.0.0",
 		"svelte-codemirror-editor": "^1.1.0",
 		"svelte-exmarkdown": "^3.0.1"
 	}

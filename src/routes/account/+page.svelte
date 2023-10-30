@@ -35,6 +35,8 @@
 
 <h2>Profile and Abstract Information</h2>
 
+<p>Required fields are marked with an asterisk (*).</p>
+
 <div class="form-widget">
 	<form
 		class="form-widget"
@@ -44,14 +46,14 @@
 		bind:this={profileForm}
 	>
 		<div>
-			<label for="email">Email</label>
+			<label for="email">Email *</label>
 			<span>{session?.user.email}</span>
 			<small>
 				(Not you? <button style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> )</small>
 		</div>
 
 		<div>
-			<label for="fullName">Full Name</label>
+			<label for="fullName">Full Name *</label>
 			<input id="fullName" name="fullName" type="text" value={form?.fullName ?? fullName} />
 		</div>
 

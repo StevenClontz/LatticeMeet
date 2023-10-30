@@ -2,6 +2,7 @@
 <script lang="ts">
 	import { Auth } from '@supabase/auth-ui-svelte'
 	import { ThemeSupa } from '@supabase/auth-ui-shared'
+	import { page } from '$app/stores';  
 
 	export let data
 </script>
@@ -16,7 +17,7 @@
 		<Auth
 			supabaseClient={data.supabase}
 			view="magic_link"
-			redirectTo={`${data.url}/auth/callback`}
+			redirectTo={`${$page.url.origin}/auth/callback`}
 			showLinks={false}
 			appearance={{ theme: ThemeSupa, style: { input: 'color: #000' } }}
 		/>

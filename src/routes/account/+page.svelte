@@ -3,6 +3,13 @@
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import Avatar from './Avatar.svelte'
+	import Markdown from 'svelte-exmarkdown';
+    import CodeMirror from "svelte-codemirror-editor";
+    import { markdown } from "@codemirror/lang-markdown";
+	import type { Plugin } from 'svelte-exmarkdown';
+	import 'katex/dist/katex.min.css';
+	import rehypeKatex from 'rehype-katex';
+	import remarkMath from 'remark-math';
 
 	export let data
 	export let form
@@ -16,6 +23,14 @@
 	let fullName: string = profile?.full_name ?? ''
 	let website: string = profile?.website ?? ''
 	let avatarUrl: string = profile?.avatar_url ?? ''
+
+	let abstract = `
+Replace this *sample* abstract with your **actual** abstract.
+
+This is a [Markdown](https://www.markdownguide.org/) editor with
+$\\LaTeX$ support. Use the preview below to confirm that your
+abstract renders as expected.
+	`.trim();
 
 	const handleSubmit: SubmitFunction = () => {
 		loading = true
@@ -31,6 +46,10 @@
 			update()
 		}
 	}
+
+	const plugins: Plugin[] = [
+		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
+	];
 </script>
 
 <h2>Profile and Abstract Information</h2>
@@ -46,8 +65,8 @@
 		bind:this={profileForm}
 	>
 		<div>
-			<label for="email">Email *</label>
-			<span>{session?.user.email}</span>
+			<span class="label">Email *</span>
+			<span id="email">{session?.user.email}</span>
 			<small>
 				(Not you? <button style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> )</small>
 		</div>
@@ -63,15 +82,29 @@
 		</div>
 
 		<div>
-			<label for="avatar">Photo</label>
-			<Avatar
-				{supabase}
-				bind:url={avatarUrl}
-				size={10}
-				on:upload={() => {
-					profileForm.requestSubmit()
-				}}
-			/>
+			<span class="label">Photo</span>
+			<div id="avatar">
+				<Avatar
+					{supabase}
+					bind:url={avatarUrl}
+					size={10}
+					on:upload={() => {
+						profileForm.requestSubmit()
+					}}
+				/>
+			</div>
+		</div>
+
+		<div>
+			<span class="label">Abstract</span>
+			<CodeMirror 
+				bind:value={abstract}
+				lang={markdown()}/>
+		</div>
+
+		<div>
+			<span class="label">Preview of Abstract</span>
+			<Markdown md={abstract} {plugins}/>
 		</div>
 
 		<div>

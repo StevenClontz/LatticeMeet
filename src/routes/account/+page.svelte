@@ -29,7 +29,7 @@
 Replace this *sample* abstract with your **actual** abstract.
 
 This is a [Markdown](https://www.markdownguide.org/) editor with
-$\\LaTeX$ support. Use the preview below to confirm that your
+$\\LaTeX$ (\`$\\LaTeX$\`) support. Use the preview below to confirm that your
 abstract renders as expected.
 	`.trim();
 

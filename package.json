@@ -33,6 +33,7 @@
 		"@supabase/auth-ui-shared": "^0.1.8",
 		"@supabase/auth-ui-svelte": "^0.2.7",
 		"@supabase/supabase-js": "^2.38.4",
+		"svelte-codemirror-editor": "^1.1.0",
 		"svelte-exmarkdown": "^3.0.1"
 	}
 }

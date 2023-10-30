@@ -32,6 +32,8 @@
 	}
 </script>
 
+<h2>Profile and Abstract Information</h2>
+
 <div class="form-widget">
 	<form
 		class="form-widget"
@@ -40,17 +42,9 @@
 		use:enhance={handleSubmit}
 		bind:this={profileForm}
 	>
-		<Avatar
-			{supabase}
-			bind:url={avatarUrl}
-			size={10}
-			on:upload={() => {
-				profileForm.requestSubmit()
-			}}
-		/>
 		<div>
 			<label for="email">Email</label>
-			<input name="email" id="email" type="text" value={session?.user.email} disabled />
+			{session?.user.email}
 		</div>
 
 		<div>
@@ -61,6 +55,18 @@
 		<div>
 			<label for="website">Website</label>
 			<input id="website" name="website" type="url" value={form?.website ?? website} />
+		</div>
+
+		<div>
+			<label for="avatar">Photo</label>
+			<Avatar
+				{supabase}
+				bind:url={avatarUrl}
+				size={10}
+				on:upload={() => {
+					profileForm.requestSubmit()
+				}}
+			/>
 		</div>
 
 		<div>

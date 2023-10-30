@@ -11,6 +11,7 @@
 	$: ({ session, supabase, profile } = data)
 
 	let profileForm: HTMLFormElement
+	let signOutForm: HTMLFormElement
 	let loading = false
 	let fullName: string = profile?.full_name ?? ''
 	let website: string = profile?.website ?? ''
@@ -44,7 +45,9 @@
 	>
 		<div>
 			<label for="email">Email</label>
-			{session?.user.email}
+			<span>{session?.user.email}</span>
+			<small>
+				(Not you? <button style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> )</small>
 		</div>
 
 		<div>
@@ -79,7 +82,7 @@
 		</div>
 	</form>
 
-	<form method="post" action="?/signout" use:enhance={handleSignOut}>
+	<form bind:this={signOutForm} method="post" action="?/signout" use:enhance={handleSignOut}>
 		<div>
 			<button class="button block" disabled={loading}>Sign Out</button>
 		</div>

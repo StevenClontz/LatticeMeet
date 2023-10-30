@@ -24,6 +24,7 @@
 	let website: string = profile?.website ?? ''
 	let avatarUrl: string = profile?.avatar_url ?? ''
 
+	let title = "A placeholder title $x^2$"
 	let abstract = `
 Replace this *sample* abstract with your **actual** abstract.
 
@@ -96,7 +97,17 @@ abstract renders as expected.
 		</div>
 
 		<div>
-			<span class="label">Abstract</span>
+			<label for="title">Title *</label>
+			<input id="title" name="title" type="text" bind:value={title}/>
+		</div>
+
+		<div>
+			<span class="label">Preview of Title</span>
+			<Markdown md={title} {plugins}/>
+		</div>
+
+		<div>
+			<span class="label">Abstract *</span>
 			<CodeMirror 
 				bind:value={abstract}
 				lang={markdown()}/>

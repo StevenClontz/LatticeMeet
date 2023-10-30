@@ -1,10 +1,10 @@
-import { fail, redirect } from '@sveltejs/kit'
+import { fail, redirect, error } from '@sveltejs/kit'
 
 export const load = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession()
 
 	if (!session) {
-		throw redirect(303, '/')
+		throw redirect(303, '/login')
 	}
 
 	const { data: profile } = await supabase
@@ -12,6 +12,11 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 		.select(`full_name, website, avatar_url`)
 		.eq('id', session.user.id)
 		.single()
+	
+	if (profile === null) {
+		await supabase.auth.signOut()
+		throw error(500, "Profile could not be loaded from server. Please try again.")
+	}
 
 	return { profile }
 }

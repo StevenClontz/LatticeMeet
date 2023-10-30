@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>User Management</title>
+	<title>Lattice Meet BETA</title>
 </svelte:head>
 
 <div class="container" style="padding: 50px 0 100px 0">

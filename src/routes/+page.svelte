@@ -6,10 +6,6 @@
 	export let data
 </script>
 
-<svelte:head>
-	<title>Lattice Meet BETA</title>
-</svelte:head>
-
 <h3>STDC2024 Abstract Submission</h3>
 <p>
 	To submit or edit your abstract, enter your email address below and click "Send Magic Link".

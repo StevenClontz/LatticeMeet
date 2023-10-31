@@ -79,6 +79,12 @@ abstract renders as expected.
 		</div>
 
 		<div>
+			<label for="orcidId">Orcid ID</label>
+			<input id="orcidId" name="orcidId" type="url" value={form?.orcidId ?? orcidId} />
+			<p><small>Include the full URL: <code>https://orcid.org/xxxx-xxxx-xxxx-xxxx</code></small></p>
+		</div>
+
+		<div>
 			<label for="website">Website</label>
 			<input id="website" name="website" type="url" value={form?.website ?? website} />
 		</div>

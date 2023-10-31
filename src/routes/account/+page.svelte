@@ -23,6 +23,7 @@
 	let fullName: string = profile?.full_name ?? ''
 	let website: string = profile?.website ?? ''
 	let avatarUrl: string = profile?.avatar_url ?? ''
+	let orcidId: string = profile?.orcid_id ?? ''
 
 	let title = "A placeholder title $x^2$"
 	let abstract = `

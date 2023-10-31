@@ -9,7 +9,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 	const { data: profile } = await supabase
 		.from('profiles')
-		.select(`full_name, website, avatar_url`)
+		.select(`full_name, website, avatar_url, orcid_id`)
 		.eq('id', session.user.id)
 		.single()
 	
@@ -27,6 +27,7 @@ export const actions = {
 		const fullName = formData.get('fullName') as string
 		const website = formData.get('website') as string
 		const avatarUrl = formData.get('avatarUrl') as string
+		const orcidId = formData.get('orcidId') as string
 
 		const session = await getSession()
 
@@ -35,6 +36,7 @@ export const actions = {
 			full_name: fullName,
 			website,
 			avatar_url: avatarUrl,
+			orcid_id: orcidId,
 			updated_at: new Date()
 		})
 
@@ -42,14 +44,16 @@ export const actions = {
 			return fail(500, {
 				fullName,
 				website,
-				avatarUrl
+				avatarUrl,
+				orcidId
 			})
 		}
 
 		return {
 			fullName,
 			website,
-			avatarUrl
+			avatarUrl,
+			orcidId
 		}
 	},
 	signout: async ({ locals: { supabase, getSession } }) => {

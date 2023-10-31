@@ -9,18 +9,21 @@ export interface Database {
 					updated_at: string | null
 					avatar_url: string | null
 					website: string | null
+					orcid_id: string | null
 				}
 				Insert: {
 					id: string
 					updated_at?: string | null
 					avatar_url?: string | null
 					website?: string | null
+					orcid_id?: string | null
 				}
 				Update: {
 					id?: string
 					updated_at?: string | null
 					avatar_url?: string | null
 					website?: string | null
+					orcid_id?: string | null
 				}
 			}
 		}

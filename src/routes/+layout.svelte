@@ -26,4 +26,10 @@
 
 <div class="container" style="padding: 50px 0 100px 0">
 	<slot />
+	<hr/>
+	<p style="text-align:center">
+		<a href="/">Home</a> | 
+		<a href="/profiles">Profiles</a> | 
+		<a href="/profile">Your Profile</a>
+	</p>
 </div>

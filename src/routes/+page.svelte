@@ -2,7 +2,7 @@
 	import appTitle from "$lib/appTitle";
 </script>
 
-<h3>{appTitle}</h3>
+<h2>{appTitle}</h2>
 
 <p>
 	<strong>What's this?</strong>

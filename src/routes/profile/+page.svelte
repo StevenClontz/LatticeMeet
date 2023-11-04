@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
-	import Avatar from './Avatar.svelte'
+	import Avatar from '$lib/Avatar.svelte'
 	import Markdown from 'svelte-exmarkdown';
     import CodeMirror from "svelte-codemirror-editor";
     import { markdown } from "@codemirror/lang-markdown";

@@ -7,10 +7,10 @@
 	export let data
 </script>
 
-<h3>STDC2024 Abstract Submission</h3>
+<h3>LatticeMeet BETA login</h3>
 <p>
-	To submit or edit your abstract, enter your email address below and click "Send Magic Link".
-	Use the link that is emailed to you to access your abstract.
+	Enter your email address below and click "Send Magic Link".
+	Use the link that is emailed to you to access your profile.
 </p>
 <div class="row flex-center flex">
 	<div class="col-6 form-widget">

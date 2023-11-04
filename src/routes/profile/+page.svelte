@@ -10,6 +10,7 @@
 	import 'katex/dist/katex.min.css';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
+	import appTitle from '$lib/appTitle.js';
 
 	export let data
 	export let form
@@ -54,9 +55,12 @@ abstract renders as expected.
 	];
 </script>
 
-<h2>Profile and Abstract Information</h2>
+<h2>{appTitle} Profile</h2>
 
-<p>Required fields are marked with an asterisk (*).</p>
+<p>
+	Provided profile data will be publicly available at the {appTitle}
+	<a href="../profiles">Profiles page</a>.
+</p>
 
 <div class="form-widget">
 	<form
@@ -67,14 +71,14 @@ abstract renders as expected.
 		bind:this={profileForm}
 	>
 		<div>
-			<span class="label">Email *</span>
+			<span class="label">Email</span>
 			<span id="email">{session?.user.email}</span>
 			<small>
 				(Not you? <button style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> )</small>
 		</div>
 
 		<div>
-			<label for="fullName">Full Name *</label>
+			<label for="fullName">Full Name</label>
 			<input id="fullName" name="fullName" type="text" value={form?.fullName ?? fullName} />
 		</div>
 
@@ -103,7 +107,7 @@ abstract renders as expected.
 			</div>
 		</div>
 
-		<div>
+		<!-- <div>
 			<label for="title">Title *</label>
 			<input id="title" name="title" type="text" bind:value={title}/>
 		</div>
@@ -123,7 +127,7 @@ abstract renders as expected.
 		<div>
 			<span class="label">Preview of Abstract</span>
 			<Markdown md={abstract} {plugins}/>
-		</div>
+		</div> -->
 
 		<div>
 			<input

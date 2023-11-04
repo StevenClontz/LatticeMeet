@@ -3,6 +3,7 @@
 	import '../styles.css'
 	import { invalidate } from '$app/navigation'
 	import { onMount } from 'svelte'
+	import appTitle from '$lib/appTitle';
 
 	export let data
 
@@ -21,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<title>Lattice Meet BETA</title>
+	<title>{appTitle}</title>
 </svelte:head>
 
 <div class="container" style="padding: 50px 0 100px 0">

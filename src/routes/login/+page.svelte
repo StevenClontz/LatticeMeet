@@ -3,11 +3,12 @@
 	import { Auth } from '@supabase/auth-ui-svelte'
 	import { ThemeSupa } from '@supabase/auth-ui-shared'
 	import { page } from '$app/stores';  
+	import appTitle from '$lib/appTitle';
 
 	export let data
 </script>
 
-<h3>LatticeMeet BETA login</h3>
+<h3>{appTitle} Login</h3>
 <p>
 	Enter your email address below and click "Send Magic Link".
 	Use the link that is emailed to you to access your profile.

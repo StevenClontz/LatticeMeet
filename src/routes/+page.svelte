@@ -1,8 +1,12 @@
-<h3>LatticeMeet BETA</h3>
+<script lang="ts">
+	import appTitle from "$lib/appTitle";
+</script>
+
+<h3>{appTitle}</h3>
 
 <p>
 	<strong>What's this?</strong>
-	LatticeMeet BETA is an early preview of an upcoming 
+	{appTitle} is an early preview of an upcoming 
 	<a href="https://en.wikipedia.org/wiki/Science_gateway">
 		scientific gateway
 	</a>

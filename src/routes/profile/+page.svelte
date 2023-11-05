@@ -73,7 +73,12 @@ abstract renders as expected.
 			<span class="label">Email</span>
 			<span id="email">{session?.user.email}</span>
 			<small>
-				(Not you? <button style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> )</small>
+				(Not you? 
+				<form style="display:inline-block" bind:this={signOutForm} method="post" action="?/signout" use:enhance={handleSignOut}>
+   					<button type="submit" style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> 
+				</form>
+				)
+			</small>
 		</div>
 
 		<div>
@@ -135,12 +140,6 @@ abstract renders as expected.
 				value={loading ? 'Loading...' : 'Update'}
 				disabled={loading}
 			/>
-		</div>
-	</form>
-
-	<form bind:this={signOutForm} method="post" action="?/signout" use:enhance={handleSignOut}>
-		<div>
-			<button class="button block" disabled={loading}>Sign Out</button>
 		</div>
 	</form>
 </div>

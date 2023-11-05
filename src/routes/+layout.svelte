@@ -24,7 +24,7 @@
 	<title>{appTitle}</title>
 </svelte:head>
 
-<div class="container">
+<div class="container" style="padding-bottom:50px">
 	<h1>{appTitle}</h1>
 	<p>
 		<a href="/">Home</a> | 

@@ -25,6 +25,29 @@ export interface Database {
 					website?: string | null
 					orcid_id?: string | null
 				}
+			},
+			collections: {
+				Row: {
+					id: string
+					title: string | null
+					short_title: string | null
+					description: string | null
+					website: string | null
+				}
+				Insert: {
+					id: string
+					title?: string | null
+					short_title?: string | null
+					description?: string | null
+					website?: string | null
+				}
+				Update: {
+					id?: string
+					title?: string | null
+					short_title?: string | null
+					description?: string | null
+					website?: string | null
+				}
 			}
 		}
 		Views: {

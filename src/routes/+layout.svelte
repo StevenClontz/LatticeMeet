@@ -29,7 +29,8 @@
 	<hr/>
 	<p style="text-align:center">
 		<a href="/">Home</a> | 
-		<a href="/profiles">Profiles</a> | 
-		<a href="/profile">Your Profile</a>
+		<a href="/profiles">Profiles</a>
+		(<a href="/profile">Your Profile</a>) | 
+		<a href="/collections">Collections</a>
 	</p>
 </div>

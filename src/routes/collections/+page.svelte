@@ -9,11 +9,9 @@
 
 <h2>{appTitle} Collections</h2>
 
-	{#each collections as collection}
-		<hr/>
-		<h3>{collection.title}</h3>
-		{#if collection.website && collection.website !== ""}
-			<p><a href={collection.website}>Website</a></p>
-		{/if}
-		<Markdown md={collection.description}/>
-	{/each}
+{#each collections as collection}
+	<hr/>
+	<h3>{collection.title}</h3>
+	<Markdown md={collection.description}/>
+	<p><a href={`/collections/${collection.id}`}>Details</a></p>
+{/each}

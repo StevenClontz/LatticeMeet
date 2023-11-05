@@ -54,7 +54,7 @@ abstract renders as expected.
 	];
 </script>
 
-<h2>{appTitle} Profile</h2>
+<h2>Your Profile</h2>
 
 <p>
 	Provided profile data will be publicly available at the {appTitle}

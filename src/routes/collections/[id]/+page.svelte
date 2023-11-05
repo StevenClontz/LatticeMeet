@@ -7,9 +7,7 @@
 	let { collection } = data
 </script>
 
-<h2>{appTitle} Collection</h2>
-
-<h3>{collection.title}</h3>
+<h2>{collection.title}</h2>
 {#if collection.website && collection.website !== ""}
 	<p><a href={collection.website}>Website</a></p>
 {/if}

@@ -7,11 +7,15 @@
 	let { collections } = data
 </script>
 
-<h2>{appTitle} Collections</h2>
+<h2>Collections</h2>
 
-{#each collections as collection}
-	<hr/>
-	<h3>{collection.title}</h3>
-	<Markdown md={collection.description}/>
-	<p><a href={`/collections/${collection.id}`}>Details</a></p>
-{/each}
+<ul>
+	{#each collections as collection}
+		<li>
+			<p>
+				{collection.title}
+				<a href={`/collections/${collection.id}`}>Details</a>
+			</p>
+		</li>
+	{/each}
+</ul>

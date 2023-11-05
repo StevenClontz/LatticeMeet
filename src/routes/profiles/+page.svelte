@@ -6,7 +6,7 @@
 	let { profiles } = data
 </script>
 
-<h2>{appTitle} Profiles</h2>
+<h2>Profiles</h2>
 
 <ul>
 	{#each profiles as profile}

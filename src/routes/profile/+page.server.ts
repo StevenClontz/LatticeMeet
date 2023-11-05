@@ -9,7 +9,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 	const { data: profile } = await supabase
 		.from('profiles')
-		.select(`full_name, website, avatar_url, orcid_id`)
+		.select(`first_name, last_name, website, avatar_url, orcid_id`)
 		.eq('id', session.user.id)
 		.single()
 	
@@ -24,7 +24,8 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 export const actions = {
 	update: async ({ request, locals: { supabase, getSession } }) => {
 		const formData = await request.formData()
-		const fullName = formData.get('fullName') as string
+		const firstName = formData.get('firstName') as string
+		const lastName = formData.get('lastName') as string
 		const website = formData.get('website') as string
 		const avatarUrl = formData.get('avatarUrl') as string
 		const orcidId = formData.get('orcidId') as string
@@ -33,7 +34,8 @@ export const actions = {
 
 		const { error } = await supabase.from('profiles').upsert({
 			id: session?.user.id,
-			full_name: fullName,
+			first_name: firstName,
+			last_name: lastName,
 			website,
 			avatar_url: avatarUrl,
 			orcid_id: orcidId,
@@ -42,7 +44,8 @@ export const actions = {
 
 		if (error) {
 			return fail(500, {
-				fullName,
+				firstName,
+				lastName,
 				website,
 				avatarUrl,
 				orcidId
@@ -50,7 +53,8 @@ export const actions = {
 		}
 
 		return {
-			fullName,
+			firstName,
+			lastName,
 			website,
 			avatarUrl,
 			orcidId

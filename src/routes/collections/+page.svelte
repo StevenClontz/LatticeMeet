@@ -1,7 +1,4 @@
 <script lang="ts">
-	import appTitle from '$lib/appTitle.js';
-	import Markdown from 'svelte-exmarkdown';
-
 	export let data
 
 	let { collections } = data

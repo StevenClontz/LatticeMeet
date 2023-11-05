@@ -1,6 +1,4 @@
 <script lang="ts">
-	import appTitle from '$lib/appTitle.js';
-
 	export let data
 
 	let { profiles } = data
@@ -11,7 +9,8 @@
 <ul>
 	{#each profiles as profile}
 		<li>
-			{profile.full_name}
+			{profile.first_name}
+			{profile.last_name}
 			{#if profile.website && profile.website !== ""}
 				<a href={profile.website}>Website</a>
 			{/if}

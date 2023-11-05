@@ -7,6 +7,8 @@ export interface Database {
 				Row: {
 					id: string
 					updated_at: string | null
+					first_name: string | null
+					last_name: string | null
 					avatar_url: string | null
 					website: string | null
 					orcid_id: string | null
@@ -14,6 +16,8 @@ export interface Database {
 				Insert: {
 					id: string
 					updated_at?: string | null
+					first_name?: string | null
+					last_name?: string | null
 					avatar_url?: string | null
 					website?: string | null
 					orcid_id?: string | null
@@ -21,6 +25,8 @@ export interface Database {
 				Update: {
 					id?: string
 					updated_at?: string | null
+					first_name?: string | null
+					last_name?: string | null
 					avatar_url?: string | null
 					website?: string | null
 					orcid_id?: string | null

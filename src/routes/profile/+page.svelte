@@ -20,7 +20,8 @@
 	let profileForm: HTMLFormElement
 	let signOutForm: HTMLFormElement
 	let loading = false
-	let fullName: string = profile?.full_name ?? ''
+	let firstName: string = profile?.first_name ?? ''
+	let lastName: string = profile?.last_name ?? ''
 	let website: string = profile?.website ?? ''
 	let avatarUrl: string = profile?.avatar_url ?? ''
 	let orcidId: string = profile?.orcid_id ?? ''
@@ -82,8 +83,13 @@ abstract renders as expected.
 		</div>
 
 		<div>
-			<label for="fullName">Full Name</label>
-			<input id="fullName" name="fullName" type="text" value={form?.fullName ?? fullName} />
+			<label for="firstName">First Name</label>
+			<input id="firstName" name="firstName" type="text" value={form?.firstName ?? firstName} />
+		</div>
+
+		<div>
+			<label for="lastName">Last Name</label>
+			<input id="lastName" name="lastName" type="text" value={form?.lastName ?? lastName} />
 		</div>
 
 		<div>

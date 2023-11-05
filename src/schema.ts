@@ -39,6 +39,7 @@ export interface Database {
 					short_title: string | null
 					description: string | null
 					website: string | null
+					parent_id: string | null
 				}
 				Insert: {
 					id: string
@@ -46,6 +47,7 @@ export interface Database {
 					short_title?: string | null
 					description?: string | null
 					website?: string | null
+					parent_id?: string | null
 				}
 				Update: {
 					id?: string
@@ -53,6 +55,7 @@ export interface Database {
 					short_title?: string | null
 					description?: string | null
 					website?: string | null
+					parent_id?: string | null
 				}
 			}
 		}

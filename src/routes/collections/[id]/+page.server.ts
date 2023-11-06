@@ -18,5 +18,10 @@ export const load = async ({ locals: { supabase }, params }) => {
 		.eq(`id`, collection.parent_id)
 		.single()
 
-	return { collection, parent }
+	const { data: submissions } = await supabase
+		.from('submissions')
+		.select(`*`)
+		.eq(`collection_id`,params.id)
+
+	return { collection, parent, submissions }
 }

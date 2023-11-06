@@ -8,16 +8,16 @@
 	export let data
 	export let form
 
-	let { session, supabase, profile } = data
-	$: ({ session, supabase, profile } = data)
+	let { supabase, profile } = data
+	$: ({ supabase, profile } = data)
 
 	let profileForm: HTMLFormElement
 	let loading = false
-	let firstName: string = profile?.first_name ?? ''
-	let lastName: string = profile?.last_name ?? ''
-	let website: string = profile?.website ?? ''
-	let avatarUrl: string = profile?.avatar_url ?? ''
-	let orcidId: string = profile?.orcid_id ?? ''
+	let firstName: string = profile.first_name ?? ''
+	let lastName: string = profile.last_name ?? ''
+	let website: string = profile.website ?? ''
+	let avatarUrl: string = profile.avatar_url ?? ''
+	let orcidId: string = profile.orcid_id ?? ''
 
 	const handleSubmit: SubmitFunction = () => {
 		loading = true

@@ -11,20 +11,21 @@
 	import ProfileFields from '$lib/ProfileFields.svelte';
 
 	export let data
+	export let form
 
-	let { session, supabase, profile } = data
-	$: ({ session, supabase, profile } = data)
+	let { supabase, profile, submission, collection } = data
+	$: ({ supabase, profile, submission, collection  } = data)
 
 	let submissionForm: HTMLFormElement
 	let loading = false
-	let firstName: string = profile?.first_name ?? ''
-	let lastName: string = profile?.last_name ?? ''
-	let website: string = profile?.website ?? ''
-	let avatarUrl: string = profile?.avatar_url ?? ''
-	let orcidId: string = profile?.orcid_id ?? ''
+	let firstName: string = form?.firstName ?? profile.first_name ?? ''
+	let lastName: string = form?.lastName ?? profile.last_name ?? ''
+	let website: string = form?.website ?? profile.website ?? ''
+	let avatarUrl: string = form?.avatarUrl ?? profile.avatar_url ?? ''
+	let orcidId: string = form?.orcidId ?? profile.orcid_id ?? ''
 
-	let title = "A placeholder title $x^2$"
-	let abstract = `
+	let title = form?.title ?? submission?.title ?? "A placeholder title $x^2$"
+	let abstract = form?.abstract ?? submission?.abstract ?? `
 Replace this *sample* abstract with your **actual** abstract.
 
 This is a [Markdown](https://www.markdownguide.org/) editor with
@@ -39,25 +40,17 @@ abstract renders as expected.
 		}
 	}
 
-	const handleSignOut: SubmitFunction = () => {
-		loading = true
-		return async ({ update }) => {
-			loading = false
-			update()
-		}
-	}
-
 	const plugins: Plugin[] = [
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
 </script>
 
 <h2 style="margin-top:0">
-	Submit to {data.collection.short_title}
+	Submit to {collection.short_title}
 </h2>
 
 <p>
-	<small>[<a style="color:#444444" href={`/collections/${data.collection.id}`}>Go back to collection</a>]</small>
+	<small>[<a style="color:#444444" href={`/collections/${collection.id}`}>Go back to collection</a>]</small>
 </p>
 
 <div>
@@ -113,6 +106,7 @@ abstract renders as expected.
 				<CodeMirror 
 					bind:value={abstract}
 					lang={markdown()}/>
+				<input id="abstract" name="abstract" type="hidden" bind:value={abstract}/>
 			</div>
 
 			<div>

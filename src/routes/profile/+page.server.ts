@@ -1,4 +1,5 @@
 import { fail, redirect, error } from '@sveltejs/kit'
+import type { Database } from '../../schema.js'
 
 export const load = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession()
@@ -7,12 +8,14 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 		throw redirect(303, '/login')
 	}
 
-	const { data: profile } = await supabase
+	const { data: _profile  } = await supabase
 		.from('profiles')
 		.select()
 		.eq('id', session.user.id)
-		.single()
-	
+		.single() 
+
+	const profile = <Database["public"]["Tables"]["profiles"]["Row"]|null>_profile
+
 	if (profile === null) {
 		await supabase.auth.signOut()
 		throw error(500, "Profile could not be loaded from server. Please try again.")

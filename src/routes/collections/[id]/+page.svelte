@@ -6,6 +6,7 @@
 	$: collection = data.collection;
 	$: subcollections = collection.collections.sort((c:any,d:any)=>c.short_title.localeCompare(d.short_title))
 	$: parent = data.parent;
+	$: submissions = data.submissions
 </script>
 
 <h2 style="margin-top:0">
@@ -38,6 +39,15 @@
 {:else}
 	<h3>Submit to this Collection</h3>
 	<p><a href={`/collections/${collection.id}/submit`}>Submissions are now open on this page.</a></p>
-	<h3>Accepted Submissions</h3>
-	<p>Coming soon.</p>
+	{#if submissions}
+		<h3>Accepted Submissions</h3>
+		<ul>
+			{#each submissions as submission}
+				<li>
+					<h4>{submission.title}</h4>
+					<Markdown md={submission.abstract}/>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 {/if}

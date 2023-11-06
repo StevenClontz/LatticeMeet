@@ -53,7 +53,7 @@ abstract renders as expected.
 </script>
 
 <h2 style="margin-top:0">
-	Submit to {data.collection.short_title} 
+	Submit to {data.collection.short_title}
 </h2>
 
 <p>
@@ -71,11 +71,6 @@ abstract renders as expected.
 		<fieldset>
 
 			<h3>Update Your Profile</h3>
-
-			<div>
-				<span>Email</span>
-				<span id="email">{session?.user.email}</span>
-			</div>
 
 			<ProfileFields
 				firstName={firstName}
@@ -102,7 +97,7 @@ abstract renders as expected.
 			<h3>Your Submission</h3>
 
 			<div>
-				<label for="title">Submission Title</label>
+				<label for="title">Title</label>
 				<input id="title" name="title" type="text" bind:value={title}/>
 			</div>
 
@@ -114,7 +109,7 @@ abstract renders as expected.
 			</div>
 
 			<div>
-				<span>Submission Abstract</span>
+				<span>Abstract</span>
 				<CodeMirror 
 					bind:value={abstract}
 					lang={markdown()}/>

@@ -36,8 +36,8 @@
 		{/each}
 	</ul>
 {:else}
-	<h3>Submit an Abstract</h3>
+	<h3>Submit to this Collection</h3>
 	<p><a href={`/collections/${collection.id}/submit`}>Submissions are now open on this page.</a></p>
-	<h3>Accepted Abstracts</h3>
+	<h3>Accepted Submissions</h3>
 	<p>Coming soon.</p>
 {/if}

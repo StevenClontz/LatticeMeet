@@ -9,7 +9,6 @@
 	import 'katex/dist/katex.min.css';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
-	import appTitle from '$lib/appTitle.js';
 
 	export let data
 	export let form
@@ -58,8 +57,8 @@ abstract renders as expected.
 <h2>Your Profile</h2>
 
 <p>
-	Provided profile data will be publicly available at the {appTitle}
-	<a href="../profiles">Profiles page</a>.
+	Provided data will be publicly available at the
+	<a href="/profiles">Profiles page</a>.
 </p>
 
 <div class="form-widget">

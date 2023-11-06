@@ -9,10 +9,10 @@
 <ul>
 	{#each collections as collection}
 		<li>
-			<p>
-				{collection.title}
-				<a href={`/collections/${collection.id}`}>Details</a>
-			</p>
+			<h4 style="margin:0">{collection.short_title}</h4>
+			<div>
+				<a href={`/collections/${collection.id}`}>{collection.title}</a>
+			</div>
 		</li>
 	{/each}
 </ul>

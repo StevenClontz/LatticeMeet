@@ -5,6 +5,7 @@
 	export let size = 10
 	export let url: string
 	export let supabase: SupabaseClient
+	export let field = false
 
 	let avatarUrl: string | null = null
 	let uploading = false
@@ -74,20 +75,24 @@
 	{:else}
 		<div class="avatar no-image" style="height: {size}em; width: {size}em;" />
 	{/if}
-	<input type="hidden" name="avatarUrl" value={url} />
 
-	<div style="width: {size}em;">
-		<label class="button primary block" for="single">
-			{uploading ? 'Uploading ...' : 'Upload'}
-		</label>
-		<input
-			style="visibility: hidden; position:absolute;"
-			type="file"
-			id="single"
-			accept="image/*"
-			bind:files
-			on:change={uploadAvatar}
-			disabled={uploading}
-		/>
-	</div>
+	{#if field}
+		<input type="hidden" name="avatarUrl" value={url} />
+
+		<div style="width: {size}em;">
+			<label class="button primary block" for="single">
+				{uploading ? 'Uploading ...' : 'Upload'}
+			</label>
+			<input
+				style="visibility: hidden; position:absolute;"
+				type="file"
+				id="single"
+				accept="image/*"
+				bind:files
+				on:change={uploadAvatar}
+				disabled={uploading}
+			/>
+		</div>
+	{/if}
+
 </div>

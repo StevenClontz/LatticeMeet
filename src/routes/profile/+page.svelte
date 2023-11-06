@@ -53,6 +53,7 @@
 			<span class="label">Photo</span>
 			<div id="avatar">
 				<Avatar
+					field
 					{supabase}
 					bind:url={avatarUrl}
 					size={10}

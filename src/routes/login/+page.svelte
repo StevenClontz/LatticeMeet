@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Auth } from '@supabase/auth-ui-svelte'
 	import { ThemeSupa } from '@supabase/auth-ui-shared'
-	import { page } from '$app/stores';  
-	import appTitle from '$lib/appTitle';
+	import { page } from '$app/stores';
 
 	export let data
 </script>

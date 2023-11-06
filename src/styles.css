@@ -383,3 +383,9 @@ code {
 	font-family: monospace;
 	color: gray;
 }
+
+/* Images */
+
+img {
+	max-width: 100%
+}

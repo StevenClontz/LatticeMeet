@@ -1,1 +1,1 @@
-export default "LatticeMeet BETA"
+export default "ScholarLattice BETA"

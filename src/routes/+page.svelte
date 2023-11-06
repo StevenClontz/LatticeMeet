@@ -14,3 +14,8 @@
 	</a>
 	to be held in March 2024.
 </p>
+
+<p>
+	<a href="https://github.com/StevenClontz/ScholarLattice">GitHub</a> |
+	<a href="https://topology.pi-base.org">pi-Base</a>
+</p>

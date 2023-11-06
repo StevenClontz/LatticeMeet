@@ -8,15 +8,18 @@
 	$: parent = data.parent;
 </script>
 
-<h2>
+<h2 style="margin-top:0">
 	{collection.short_title}: {collection.title}
+</h2>
+
+<p>
 	{#if collection.website && collection.website !== ""}
 		<small>[<a style="color:#444444" href={collection.website}>Website</a>]</small>
 	{/if}
 	{#if parent}
 		<small>[<a style="color:#444444" href={`/collections/${parent.id}`}>Go back to {parent.short_title}</a>]</small>
 	{/if}
-</h2>
+</p>
 
 <Markdown md={collection.description}/>
 

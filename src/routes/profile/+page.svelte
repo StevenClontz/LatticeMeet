@@ -27,7 +27,7 @@
 	}
 </script>
 
-<h2>Your Profile</h2>
+<h2 style="margin-top:0">Your Profile</h2>
 
 <div class="form-widget">
 	<form
@@ -37,10 +37,7 @@
 		use:enhance={handleSubmit}
 		bind:this={profileForm}
 	>
-		<div>
-			<span class="label">Email</span>
-			<span id="email">{session?.user.email}</span>
-		</div>
+		<fieldset>
 
 		<ProfileFields
 			firstName={form?.firstName ?? firstName}
@@ -51,7 +48,6 @@
 			id={profile.id}/>
 
 		<div>
-			<span class="label">Photo</span>
 			<div id="avatar">
 				<Avatar
 					field
@@ -73,5 +69,6 @@
 				disabled={loading}
 			/>
 		</div>
+		</fieldset>
 	</form>
 </div>

@@ -5,7 +5,7 @@
 	$: profile = data.profile
 </script>
 
-<h2>
+<h2 style="margin-top:0">
 	Profiles
 </h2>
 

@@ -4,7 +4,7 @@
 	let { collections } = data
 </script>
 
-<h2>Collections</h2>
+<h2 style="margin-top:0">Collections</h2>
 
 <ul>
 	{#each collections as collection}

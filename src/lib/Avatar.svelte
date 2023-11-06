@@ -65,6 +65,22 @@
 </script>
 
 <div>
+	{#if field}
+		<input type="hidden" name="avatarUrl" value={url} />
+		<div>
+			<label for="single">
+				{uploading ? 'Uploading ...' : 'Photo'}
+			</label>
+			<input
+				type="file"
+				id="single"
+				accept="image/*"
+				bind:files
+				on:change={uploadAvatar}
+				disabled={uploading}
+			/>
+		</div>
+	{/if}
 	{#if avatarUrl}
 		<img
 			src={avatarUrl}
@@ -75,24 +91,21 @@
 	{:else}
 		<div class="avatar no-image" style="height: {size}em; width: {size}em;" />
 	{/if}
-
-	{#if field}
-		<input type="hidden" name="avatarUrl" value={url} />
-
-		<div style="width: {size}em;">
-			<label class="button primary block" for="single">
-				{uploading ? 'Uploading ...' : 'Upload'}
-			</label>
-			<input
-				style="visibility: hidden; position:absolute;"
-				type="file"
-				id="single"
-				accept="image/*"
-				bind:files
-				on:change={uploadAvatar}
-				disabled={uploading}
-			/>
-		</div>
-	{/if}
-
 </div>
+
+
+<style>
+.avatar {
+	border-radius: var(--custom-border-radius);
+	overflow: hidden;
+	max-width: 100%;
+}
+.avatar.image {
+	object-fit: cover;
+}
+.avatar.no-image {
+	background-color: #333;
+	border: 1px solid rgb(200, 200, 200);
+	border-radius: 5px;
+}
+</style>

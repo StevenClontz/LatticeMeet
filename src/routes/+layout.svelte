@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../tacit.css'
 	import '../styles.css'
 	import { invalidate } from '$app/navigation'
 	import { onMount } from 'svelte'
@@ -31,20 +32,46 @@
 	<title>{appTitle}</title>
 </svelte:head>
 
-<div class="container" style="padding-bottom:50px">
-	<h1>{appTitle}</h1>
-	<p>
-		<a href="/">Home</a> | 
-		<a href="/profiles">Profiles</a> | 
-		<a href="/collections">Collections</a>
-	</p>
-	{#if session}
-		Logged in as {session.user.email} |
-		<a href="/profile">Your profile</a> |
-		<button on:click={handleSignOut} style="padding:0.2rem;font-size:0.8em">Sign out</button> 
-	{:else}
-		<a href="/login">Login</a>
-	{/if}
-	<hr/>
-	<slot />
-</div>
+<section>
+	<header style="padding:18px">
+		<nav>
+			<ul>
+				<li>
+					<h1 style="margin:0">{appTitle}</h1>
+				</li>
+			</ul>
+		</nav>
+		<nav>
+			<ul>
+				<li>
+					<a href="/">Home</a> 
+				</li>
+				<li>
+					<a href="/profiles">Profiles</a>
+				</li>
+				<li>
+					<a href="/collections">Collections</a>
+				</li>
+				{#if session}
+					<li>
+						<a href="/profile">{session.user.email}</a>
+					</li>
+					<li>
+						<button style="padding:0 0.5em;margin:0" on:click={handleSignOut}>Sign out</button> 
+					</li>
+				{:else}
+					<li>
+						<a href="/login">Login</a>
+					</li>
+				{/if}
+			</ul>
+		</nav>
+	</header>
+	
+	<article>
+		<slot />
+	</article>
+</section>
+
+<style>
+</style>

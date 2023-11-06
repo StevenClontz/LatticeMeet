@@ -52,12 +52,15 @@ abstract renders as expected.
 	];
 </script>
 
-<h2>
+<h2 style="margin-top:0">
 	Submit to {data.collection.short_title} 
-	<small>[<a style="color:#444444" href={`/collections/${data.collection.id}`}>Go back to collection</a>]</small>
 </h2>
 
-<div class="form-widget">
+<p>
+	<small>[<a style="color:#444444" href={`/collections/${data.collection.id}`}>Go back to collection</a>]</small>
+</p>
+
+<div>
 	<form
 		class="form-widget"
 		method="post"
@@ -65,66 +68,74 @@ abstract renders as expected.
 		use:enhance={handleSubmit}
 		bind:this={submissionForm}
 	>
+		<fieldset>
 
-		<h3>Update Your Profile</h3>
+			<h3>Update Your Profile</h3>
 
-		<div>
-			<span class="label">Email</span>
-			<span id="email">{session?.user.email}</span>
-		</div>
+			<div>
+				<span>Email</span>
+				<span id="email">{session?.user.email}</span>
+			</div>
 
-		<ProfileFields
-			firstName={firstName}
-			lastName={lastName}
-			orcidId={orcidId}
-			website={website}
-			approved={profile.approved}/>
+			<ProfileFields
+				firstName={firstName}
+				lastName={lastName}
+				orcidId={orcidId}
+				website={website}
+				approved={profile.approved}
+				id={profile.id}/>
 
-		<div>
-			<span class="label">Photo</span>
-			<div id="avatar">
-				<Avatar
-					{supabase}
-					bind:url={avatarUrl}
-					size={10}
-					on:upload={() => {
-						submissionForm.requestSubmit()
-					}}
+			<div>
+				<div id="avatar">
+					<Avatar
+						field
+						{supabase}
+						bind:url={avatarUrl}
+						size={10}
+						on:upload={() => {
+							submissionForm.requestSubmit()
+						}}
+					/>
+				</div>
+			</div>
+
+			<h3>Your Submission</h3>
+
+			<div>
+				<label for="title">Submission Title</label>
+				<input id="title" name="title" type="text" bind:value={title}/>
+			</div>
+
+			<div>
+				<span>Preview of Title</span>
+				<blockquote>
+					<Markdown md={title} {plugins}/>
+				</blockquote>
+			</div>
+
+			<div>
+				<span>Submission Abstract</span>
+				<CodeMirror 
+					bind:value={abstract}
+					lang={markdown()}/>
+			</div>
+
+			<div>
+				<span>Preview of Abstract</span>
+				<blockquote>
+					<Markdown md={abstract} {plugins}/>
+				</blockquote>
+			</div>
+
+			<div>
+				<input
+					type="submit"
+					class="button block primary"
+					value={loading ? 'Loading...' : 'Submit'}
+					disabled={loading}
 				/>
 			</div>
-		</div>
-
-		<h3>Your Submission</h3>
-
-		<div>
-			<label for="title">Submission Title</label>
-			<input id="title" name="title" type="text" bind:value={title}/>
-		</div>
-
-		<div>
-			<span class="label">Preview of Title</span>
-			<Markdown md={title} {plugins}/>
-		</div>
-
-		<div>
-			<span class="label">Submission Abstract</span>
-			<CodeMirror 
-				bind:value={abstract}
-				lang={markdown()}/>
-		</div>
-
-		<div>
-			<span class="label">Preview of Abstract</span>
-			<Markdown md={abstract} {plugins}/>
-		</div>
-
-		<div>
-			<input
-				type="submit"
-				class="button block primary"
-				value={loading ? 'Loading...' : 'Submit'}
-				disabled={loading}
-			/>
-		</div>
+			
+		</fieldset>
 	</form>
 </div>

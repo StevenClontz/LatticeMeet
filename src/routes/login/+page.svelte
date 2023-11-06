@@ -10,7 +10,7 @@
 <h3>Login</h3>
 <p>
 	Enter your email address below and click "Send Magic Link".
-	Use the link that is emailed to you to access your profile.
+	Use the link that is emailed to you to login.
 </p>
 <div class="row flex-center flex">
 	<div class="col-6 form-widget">

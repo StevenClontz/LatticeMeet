@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation';
 	import appTitle from '$lib/appTitle';
+	import 'katex/dist/katex.min.css';
 
 	export let data
 
@@ -38,7 +39,7 @@
 		<a href="/collections">Collections</a>
 	</p>
 	{#if session}
-		Logged in as {session.user.email} (<a href="/profile">Go to your Profile</a>)
+		Logged in as {session.user.email} (<a href="/profile">Go to your profile</a>)
 		<small>
 			(Not you? 
 				<button on:click={handleSignOut} style="padding:0.2rem;font-size:0.8em">Sign out</button> 

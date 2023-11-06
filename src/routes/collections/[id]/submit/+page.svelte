@@ -6,7 +6,6 @@
     import CodeMirror from "svelte-codemirror-editor";
     import { markdown } from "@codemirror/lang-markdown";
 	import type { Plugin } from 'svelte-exmarkdown';
-	import 'katex/dist/katex.min.css';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
 	import ProfileFields from '$lib/ProfileFields.svelte';

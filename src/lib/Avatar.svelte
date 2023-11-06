@@ -96,7 +96,7 @@
 
 <style>
 .avatar {
-	border-radius: var(--custom-border-radius);
+	border-radius: 15px;
 	overflow: hidden;
 	max-width: 100%;
 }

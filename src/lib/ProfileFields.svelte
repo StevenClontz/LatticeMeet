@@ -4,6 +4,7 @@
 	export let website: string
 	export let orcidId: string
     export let approved: boolean
+	export let id: string
 </script>
 
 <p style="font-style:italic;">
@@ -12,8 +13,8 @@
 	{:else}
 	Once your account has been approved by administrators, provided 
 	{/if}
-	data will be publicly available at the
-	<a href="/profiles">Profiles page</a>.
+	data will be publicly available on your
+	<a href={`/profiles/${id}`}>Profiles page</a>.
 </p>
 
 <div>

@@ -39,12 +39,9 @@
 		<a href="/collections">Collections</a>
 	</p>
 	{#if session}
-		Logged in as {session.user.email} (<a href="/profile">Go to your profile</a>)
-		<small>
-			(Not you? 
-				<button on:click={handleSignOut} style="padding:0.2rem;font-size:0.8em">Sign out</button> 
-			)
-		</small>
+		Logged in as {session.user.email} |
+		<a href="/profile">Your profile</a> |
+		<button on:click={handleSignOut} style="padding:0.2rem;font-size:0.8em">Sign out</button> 
 	{:else}
 		<a href="/login">Login</a>
 	{/if}

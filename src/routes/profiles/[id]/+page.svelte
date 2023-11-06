@@ -7,7 +7,6 @@
 
 <h2>
 	Profiles
-	<small>[<a style="color:#444444" href={`/profiles`}>Go back</a>]</small>
 </h2>
 
 <h3>{profile.first_name} {profile.last_name}</h3>

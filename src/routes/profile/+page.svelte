@@ -47,7 +47,8 @@
 			lastName={form?.lastName ?? lastName}
 			orcidId={form?.orcidId ?? orcidId}
 			website={form?.website ?? website}
-			approved={profile.approved}/>
+			approved={profile.approved}
+			id={profile.id}/>
 
 		<div>
 			<span class="label">Photo</span>

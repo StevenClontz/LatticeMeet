@@ -9,14 +9,14 @@
 	import 'katex/dist/katex.min.css';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
+	import ProfileFields from '$lib/ProfileFields.svelte';
 
 	export let data
 
 	let { session, supabase, profile } = data
 	$: ({ session, supabase, profile } = data)
 
-	let profileForm: HTMLFormElement
-	let signOutForm: HTMLFormElement
+	let submissionForm: HTMLFormElement
 	let loading = false
 	let firstName: string = profile?.first_name ?? ''
 	let lastName: string = profile?.last_name ?? ''
@@ -53,14 +53,10 @@ abstract renders as expected.
 	];
 </script>
 
-<h2>Submit to {data.collection.short_title}</h2>
-
-<p>&gt; Back to <a href={`/collections/${data.collection.id}`}>{data.collection.short_title}</a></p>
-
-<p>
-	Once approved by administrators,
-	provided data will be publicly available.
-</p>
+<h2>
+	Submit to {data.collection.short_title} 
+	<small>[<a style="color:#444444" href={`/collections/${data.collection.id}`}>Go back to collection</a>]</small>
+</h2>
 
 <div class="form-widget">
 	<form
@@ -68,40 +64,22 @@ abstract renders as expected.
 		method="post"
 		action="?/update"
 		use:enhance={handleSubmit}
-		bind:this={profileForm}
+		bind:this={submissionForm}
 	>
+
+		<h3>Update Your Profile</h3>
+
 		<div>
 			<span class="label">Email</span>
 			<span id="email">{session?.user.email}</span>
-			<small>
-				(Not you? 
-				<form style="display:inline-block" bind:this={signOutForm} method="post" action="?/signout" use:enhance={handleSignOut}>
-   					<button type="submit" style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> 
-				</form>
-				)
-			</small>
 		</div>
 
-		<div>
-			<label for="firstName">First Name</label>
-			<input id="firstName" name="firstName" type="text" value={firstName} />
-		</div>
-
-		<div>
-			<label for="lastName">Last Name</label>
-			<input id="lastName" name="lastName" type="text" value={lastName} />
-		</div>
-
-		<div>
-			<label for="orcidId">Orcid ID</label>
-			<input id="orcidId" name="orcidId" type="url" value={orcidId} />
-			<p><small>Include the full URL: <code>https://orcid.org/xxxx-xxxx-xxxx-xxxx</code></small></p>
-		</div>
-
-		<div>
-			<label for="website">Website</label>
-			<input id="website" name="website" type="url" value={website} />
-		</div>
+		<ProfileFields
+			firstName={firstName}
+			lastName={lastName}
+			orcidId={orcidId}
+			website={website}
+			approved={profile.approved}/>
 
 		<div>
 			<span class="label">Photo</span>
@@ -111,11 +89,13 @@ abstract renders as expected.
 					bind:url={avatarUrl}
 					size={10}
 					on:upload={() => {
-						profileForm.requestSubmit()
+						submissionForm.requestSubmit()
 					}}
 				/>
 			</div>
 		</div>
+
+		<h3>Your Submission</h3>
 
 		<div>
 			<label for="title">Submission Title</label>

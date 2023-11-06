@@ -10,6 +10,8 @@
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
 
+	import ProfileFields from '$lib/ProfileFields.svelte';
+
 	export let data
 	export let form
 
@@ -41,26 +43,12 @@ abstract renders as expected.
 		}
 	}
 
-	const handleSignOut: SubmitFunction = () => {
-		loading = true
-		return async ({ update }) => {
-			loading = false
-			update()
-		}
-	}
-
 	const plugins: Plugin[] = [
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
 </script>
 
 <h2>Your Profile</h2>
-
-<p>
-	Once approved by administrators,
-	provided data will be publicly available at the
-	<a href="/profiles">Profiles page</a>.
-</p>
 
 <div class="form-widget">
 	<form
@@ -73,35 +61,14 @@ abstract renders as expected.
 		<div>
 			<span class="label">Email</span>
 			<span id="email">{session?.user.email}</span>
-			<small>
-				(Not you? 
-				<form style="display:inline-block" bind:this={signOutForm} method="post" action="?/signout" use:enhance={handleSignOut}>
-   					<button type="submit" style="padding:0.2rem;font-size:0.8em" on:click={()=>signOutForm.submit()}>Sign out</button> 
-				</form>
-				)
-			</small>
 		</div>
 
-		<div>
-			<label for="firstName">First Name</label>
-			<input id="firstName" name="firstName" type="text" value={form?.firstName ?? firstName} />
-		</div>
-
-		<div>
-			<label for="lastName">Last Name</label>
-			<input id="lastName" name="lastName" type="text" value={form?.lastName ?? lastName} />
-		</div>
-
-		<div>
-			<label for="orcidId">Orcid ID</label>
-			<input id="orcidId" name="orcidId" type="url" value={form?.orcidId ?? orcidId} />
-			<p><small>Include the full URL: <code>https://orcid.org/xxxx-xxxx-xxxx-xxxx</code></small></p>
-		</div>
-
-		<div>
-			<label for="website">Website</label>
-			<input id="website" name="website" type="url" value={form?.website ?? website} />
-		</div>
+		<ProfileFields
+			firstName={form?.firstName ?? firstName}
+			lastName={form?.lastName ?? lastName}
+			orcidId={form?.orcidId ?? orcidId}
+			website={form?.website ?? website}
+			approved={profile.approved}/>
 
 		<div>
 			<span class="label">Photo</span>
@@ -116,28 +83,6 @@ abstract renders as expected.
 				/>
 			</div>
 		</div>
-
-		<!-- <div>
-			<label for="title">Title *</label>
-			<input id="title" name="title" type="text" bind:value={title}/>
-		</div>
-
-		<div>
-			<span class="label">Preview of Title</span>
-			<Markdown md={title} {plugins}/>
-		</div>
-
-		<div>
-			<span class="label">Abstract *</span>
-			<CodeMirror 
-				bind:value={abstract}
-				lang={markdown()}/>
-		</div>
-
-		<div>
-			<span class="label">Preview of Abstract</span>
-			<Markdown md={abstract} {plugins}/>
-		</div> -->
 
 		<div>
 			<input

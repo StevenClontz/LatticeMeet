@@ -11,13 +11,12 @@
 <h2>
 	{collection.short_title}: {collection.title}
 	{#if collection.website && collection.website !== ""}
-		<small>[<a style="color:gray" href={collection.website}>Website</a>]</small>
+		<small>[<a style="color:#444444" href={collection.website}>Website</a>]</small>
+	{/if}
+	{#if parent}
+		<small>[<a style="color:#444444" href={`/collections/${parent.id}`}>Go back to {parent.short_title}</a>]</small>
 	{/if}
 </h2>
-
-{#if parent}
-	<p>A subcollection of <a href={`/collections/${parent.id}`}>{parent.short_title}</a></p>
-{/if}
 
 <Markdown md={collection.description}/>
 
@@ -34,5 +33,8 @@
 		{/each}
 	</ul>
 {:else}
-	<h3>Submit</h3>
+	<h3>Submit an Abstract</h3>
+	<p><a href={`/collections/${collection.id}/submit`}>Submissions are now open on this page.</a></p>
+	<h3>Accepted Abstracts</h3>
+	<p>Coming soon.</p>
 {/if}

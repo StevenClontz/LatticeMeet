@@ -57,7 +57,8 @@ abstract renders as expected.
 <h2>Your Profile</h2>
 
 <p>
-	Provided data will be publicly available at the
+	Once approved by administrators,
+	provided data will be publicly available at the
 	<a href="/profiles">Profiles page</a>.
 </p>
 

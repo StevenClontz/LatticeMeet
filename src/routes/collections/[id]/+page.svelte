@@ -1,5 +1,11 @@
 <script lang="ts">
 	import Markdown from 'svelte-exmarkdown';
+	import rehypeKatex from 'rehype-katex';
+	import remarkMath from 'remark-math';
+	import type { Plugin } from 'svelte-exmarkdown';
+	const plugins: Plugin[] = [
+		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
+	];
 
 	export let data
 
@@ -22,7 +28,7 @@
 	{/if}
 </p>
 
-<Markdown md={collection.description}/>
+<Markdown md={collection.description} {plugins}/>
 
 {#if subcollections.length > 0}
 	<h3>Subcollections</h3>
@@ -39,15 +45,13 @@
 {:else}
 	<h3>Submit to this Collection</h3>
 	<p><a href={`/collections/${collection.id}/submit`}>Submissions are now open on this page.</a></p>
-	{#if submissions}
-		<h3>Accepted Submissions</h3>
-		<ul>
-			{#each submissions as submission}
-				<li>
-					<h4>{submission.title}</h4>
-					<Markdown md={submission.abstract}/>
-				</li>
-			{/each}
-		</ul>
+	{#if submissions && submissions.length > 0}
+		<h3>Received Submissions</h3>
+		{#each submissions as submission}
+			<article>
+				<h4><Markdown md={submission.title} {plugins}/></h4>
+				<Markdown md={submission.abstract} {plugins}/>
+			</article>
+		{/each}
 	{/if}
 {/if}

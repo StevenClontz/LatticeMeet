@@ -28,15 +28,17 @@
 	let abstract = form?.abstract ?? submission?.abstract ?? `
 Replace this *sample* abstract with your **actual** abstract.
 
-This is a [Markdown](https://www.markdownguide.org/) editor with
-$\\LaTeX$ (\`$\\LaTeX$\`) support. Use the preview to confirm that your
-abstract renders as expected.
+This is a [Markdown](https://www.markdownguide.org/cheat-sheet/) editor
+with $\\LaTeX$ (\`$\\LaTeX$\`) support. Use the preview to confirm that
+your abstract renders as expected.
 	`.trim();
 
 	const handleSubmit: SubmitFunction = () => {
 		loading = true
 		return async () => {
 			loading = false
+			scrollTo({ top: 0, behavior: 'instant' })
+			alert("Submission complete.")
 		}
 	}
 

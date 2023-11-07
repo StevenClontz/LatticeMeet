@@ -23,6 +23,8 @@
 		loading = true
 		return async () => {
 			loading = false
+			scrollTo({ top: 0, behavior: 'instant' })
+			alert("Update complete.")
 		}
 	}
 </script>

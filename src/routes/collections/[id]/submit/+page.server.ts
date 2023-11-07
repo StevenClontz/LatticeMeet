@@ -40,6 +40,7 @@ export const load = async ({ locals: { supabase, getSession }, params }) => {
 		.from('submissions')
 		.select()
 		.eq(`profile_id`, session.user.id)
+		.eq(`collection_id`, params.id)
 		.single()
 
 	const submission = <Database["public"]["Tables"]["submissions"]["Row"]|null>_submission

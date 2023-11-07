@@ -14,7 +14,7 @@
 	Once your account has been approved by administrators, provided 
 	{/if}
 	data will be publicly available on your
-	<a href={`/profiles/${id}`}>Profiles page</a>.
+	<a href={`/profiles/${id}`}>public profile page</a>.
 </p>
 
 <div>

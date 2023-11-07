@@ -2,10 +2,9 @@
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import Avatar from '$lib/Avatar.svelte'
-	import Markdown from 'svelte-exmarkdown';
+	import Markdown, { allowlist, type Plugin } from 'svelte-exmarkdown';
     import CodeMirror from "svelte-codemirror-editor";
     import { markdown } from "@codemirror/lang-markdown";
-	import type { Plugin } from 'svelte-exmarkdown';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
 	import ProfileFields from '$lib/ProfileFields.svelte';
@@ -43,6 +42,11 @@ your abstract renders as expected.
 	}
 
 	const plugins: Plugin[] = [
+		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
+	];
+
+	const titlePlugins: Plugin[] = [
+		allowlist(["p", "span"]),
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
 </script>
@@ -99,7 +103,7 @@ your abstract renders as expected.
 			<div>
 				<span>Preview of Title</span>
 				<blockquote>
-					<Markdown md={title} {plugins}/>
+					<Markdown md={title} plugins={titlePlugins}/>
 				</blockquote>
 			</div>
 

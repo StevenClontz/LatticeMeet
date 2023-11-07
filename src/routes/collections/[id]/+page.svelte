@@ -1,9 +1,13 @@
 <script lang="ts">
-	import Markdown from 'svelte-exmarkdown';
+	import Markdown, { allowlist, type Plugin } from 'svelte-exmarkdown';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
-	import type { Plugin } from 'svelte-exmarkdown';
 	const plugins: Plugin[] = [
+		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
+	];
+
+	const titlePlugins: Plugin[] = [
+		allowlist(["p", "span"]),
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
 
@@ -49,7 +53,7 @@
 		<h3>Received Submissions</h3>
 		{#each submissions as submission}
 			<article>
-				<h4><Markdown md={submission.title} {plugins}/></h4>
+				<h4><Markdown md={submission.title} plugins={titlePlugins}/></h4>
 				<Markdown md={submission.abstract} {plugins}/>
 			</article>
 		{/each}

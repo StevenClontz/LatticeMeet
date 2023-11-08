@@ -36,4 +36,5 @@
 <div>
     <label for="website">Website</label>
     <input id="website" name="website" type="url" value={website} />
+    <p><small>Include the <code>http://</code> or <code>https://</code> protocol</small></p>
 </div>

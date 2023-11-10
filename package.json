@@ -30,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"@codemirror/lang-markdown": "github:codemirror/lang-markdown",
+		"@indaco/svelte-iconoir": "^6.0.3",
 		"@supabase/auth-helpers-sveltekit": "^0.10.4",
 		"@supabase/auth-ui-shared": "^0.1.8",
 		"@supabase/auth-ui-svelte": "^0.2.7",

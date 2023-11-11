@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { UserIcon } from "@indaco/svelte-iconoir/user";
+	import { UserBadgeCheckIcon } from "@indaco/svelte-iconoir/user-badge-check";
 	export let firstName: string
 	export let lastName: string
 	export let website: string
@@ -9,9 +11,11 @@
 
 <p style="font-style:italic;">
 	{#if approved}
-	Your account has been approved by administrators. Provided
+		<UserBadgeCheckIcon/>
+		Your account has been approved by administrators. Provided
 	{:else}
-	Once your account has been approved by administrators, provided 
+		<UserIcon/>
+		Once your account has been approved by administrators, provided 
 	{/if}
 	data will be publicly available on your
 	<a href={`/profiles/${id}`}>public profile page</a>.

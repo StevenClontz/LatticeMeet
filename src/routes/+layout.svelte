@@ -6,11 +6,13 @@
 	import { goto } from '$app/navigation';
 	import appTitle from '$lib/appTitle';
 	import 'katex/dist/katex.min.css';
+    import { UserIcon } from '@indaco/svelte-iconoir/user';
+    import { UserBadgeCheckIcon } from '@indaco/svelte-iconoir/user-badge-check';
 
 	export let data
 
-	let { supabase, session } = data
-	$: ({ supabase, session } = data)
+	let { supabase, session, profile } = data
+	$: ({ supabase, session, profile } = data)
 
 	const handleSignOut = async () => {
 		await supabase.auth.signOut()
@@ -18,7 +20,7 @@
 	}
 
 	onMount(() => {
-		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
+		const { data } = supabase.auth.onAuthStateChange((_, _session) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth')
 			}
@@ -52,8 +54,13 @@
 				<li>
 					<a href="/collections">Collections</a>
 				</li>
-				{#if session}
+				{#if session && profile}
 					<li>
+						{#if profile.approved}
+							<UserBadgeCheckIcon/>
+						{:else}
+							<UserIcon/>
+						{/if}
 						<a href="/profile">{session.user.email}</a>
 					</li>
 					<li>

@@ -1,5 +1,5 @@
 import { fail, redirect, error } from '@sveltejs/kit'
-import type { Database } from '../../schema.js'
+import type { Database } from '../../types.js'
 
 export const load = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession()

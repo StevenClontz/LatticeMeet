@@ -1,37 +1,39 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import type { SubmitFunction } from '@sveltejs/kit';
+	import type { PageData } from './$types';
+  	import { superForm } from 'sveltekit-superforms/client';
+ 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import Avatar from '$lib/Avatar.svelte'
 
 	import ProfileFields from '$lib/ProfileFields.svelte';
 
-	export let data
-	export let form
+	export let data:PageData
 
-	let { supabase, profile } = data
-	$: ({ supabase, profile } = data)
-
-	let profileForm: HTMLFormElement
-	let loading = false
-	let firstName: string = profile.first_name ?? ''
-	let lastName: string = profile.last_name ?? ''
-	let website: string = profile.website ?? ''
-	let avatarUrl: string = profile.avatar_url ?? ''
-	let orcidId: string = profile.orcid_id ?? ''
-
-	const handleSubmit: SubmitFunction = () => {
-		loading = true
-		return async () => {
-			loading = false
-			scrollTo({ top: 0, behavior: 'instant' })
-			alert("Update complete.")
-		}
-	}
+	const { form } = superForm(data.form);
 </script>
 
 <h2 style="margin-top:0">Your Profile</h2>
 
-<div class="form-widget">
+<SuperDebug data={$form} />
+
+<form method="POST">
+	<fieldset>
+		<label for="first_name">First Name</label>
+		<input type="text" name="first_name" bind:value={$form.first_name} />
+	  
+		<label for="last_name">Last Name</label>
+		<input type="text" name="last_name" bind:value={$form.last_name} />
+	  
+		<label for="website">Website</label>
+		<input type="url" name="website" bind:value={$form.website} />
+	  
+		<label for="orcid_id">ORCID ID</label>
+		<input type="url" name="orcid_id" bind:value={$form.orcid_id} />
+	  
+		<div><button>Submit</button></div>
+	</fieldset>
+</form>
+
+<!-- <div class="form-widget">
 	<form
 		class="form-widget"
 		method="post"
@@ -73,4 +75,4 @@
 		</div>
 		</fieldset>
 	</form>
-</div>
+</div> -->

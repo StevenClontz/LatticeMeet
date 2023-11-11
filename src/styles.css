@@ -1,2 +1,3 @@
 .codemirror-wrapper {border: 1px solid black}
 .cm-layer {position: static !important;} /* fixes weird interaction with tacit */
+input {width: 100%}

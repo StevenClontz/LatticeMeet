@@ -1,34 +1,23 @@
 import { fail, redirect, error } from '@sveltejs/kit'
-import type { Database } from '../../../../types.js'
 
-export const load = async ({ locals: { supabase, getSession }, params }) => {
+export const load = async ({ locals: { supabase, getSession, getProfile }, params }) => {
 	const session = await getSession()
 
 	if (!session) {
 		throw redirect(303, '/login')
 	}
 
-
-	const { data: _collection } = await supabase
+	const { data: collection } = await supabase
 		.from('collections')
 		.select(`*, collections(*)`)
 		.eq(`id`, params.id)
 		.single()
-
-	const collection = <Database["public"]["Tables"]["collections"]["Row"]|null>_collection
 	
 	if (collection === null) {
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
 
-
-	const { data: _profile } = await supabase
-		.from('profiles')
-		.select()
-		.eq('id', session.user.id)
-		.single()
-
-	const profile = <Database["public"]["Tables"]["profiles"]["Row"]|null>_profile
+	const profile = await getProfile()
 			
 	if (profile === null) {
 		await supabase.auth.signOut()
@@ -36,15 +25,12 @@ export const load = async ({ locals: { supabase, getSession }, params }) => {
 	}
 
 
-	const { data: _submission } = await supabase
+	const { data: submission } = await supabase
 		.from('submissions')
 		.select()
 		.eq(`profile_id`, session.user.id)
 		.eq(`collection_id`, params.id)
 		.single()
-
-	const submission = <Database["public"]["Tables"]["submissions"]["Row"]|null>_submission
-
 
 	return { profile, collection, submission }
 }
@@ -64,21 +50,21 @@ export const actions = {
 		if (!session) {
 			throw redirect(303, '/login')
 		}
-		const { data: _submission } = await supabase
+
+		const { data: submission } = await supabase
 			.from('submissions')
 			.select()
 			.eq(`profile_id`, session.user.id)
 			.single()
-		const submission = <Database["public"]["Tables"]["submissions"]["Row"]|null>_submission
 
 		const profileResponse = await supabase.from('profiles').upsert({
-			id: session?.user.id,
+			id: session.user.id,
 			first_name: firstName,
 			last_name: lastName,
 			website,
 			avatar_url: avatarUrl,
 			orcid_id: orcidId,
-			updated_at: new Date()
+			updated_at: String(new Date())
 		})
 
 		const submissionResponse = await supabase.from('submissions').upsert({

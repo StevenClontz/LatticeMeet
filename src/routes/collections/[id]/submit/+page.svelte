@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
-	import Avatar from '$lib/Avatar.svelte'
 	import Markdown, { allowlist, type Plugin } from 'svelte-exmarkdown';
     import CodeMirror from "svelte-codemirror-editor";
     import { markdown } from "@codemirror/lang-markdown";
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
-	import ProfileFields from '$lib/ProfileFields.svelte';
 
 	export let data
 	export let form
@@ -20,8 +18,6 @@
 	let firstName: string = form?.firstName ?? profile.first_name ?? ''
 	let lastName: string = form?.lastName ?? profile.last_name ?? ''
 	let website: string = form?.website ?? profile.website ?? ''
-	let avatarUrl: string = form?.avatarUrl ?? profile.avatar_url ?? ''
-	let orcidId: string = form?.orcidId ?? profile.orcid_id ?? ''
 
 	let title = form?.title ?? submission?.title ?? "A placeholder title $x^2$"
 	let abstract = form?.abstract ?? submission?.abstract ?? `
@@ -71,27 +67,7 @@ your abstract renders as expected.
 
 			<h3>Update Your Profile</h3>
 
-			<ProfileFields
-				firstName={firstName}
-				lastName={lastName}
-				orcidId={orcidId}
-				website={website}
-				approved={profile.approved}
-				id={profile.id}/>
 
-			<div>
-				<div id="avatar">
-					<Avatar
-						field
-						{supabase}
-						bind:url={avatarUrl}
-						size={10}
-						on:upload={() => {
-							submissionForm.requestSubmit()
-						}}
-					/>
-				</div>
-			</div>
 
 			<h3>Your Submission</h3>
 

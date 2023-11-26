@@ -12,11 +12,11 @@ export const load = async ({ locals: { supabase }, params }) => {
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
 
-	const { data: parent } = await supabase
+	const { data: parent } = collection.parent_id ? await supabase
 		.from('collections')
 		.select(`*`)
 		.eq(`id`, collection.parent_id)
-		.single()
+		.single() : { data: null }
 
 	const { data: submissions } = await supabase
 		.from('submissions')

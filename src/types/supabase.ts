@@ -1,4 +1,3 @@
-
 export type Json =
   | string
   | number
@@ -50,36 +49,24 @@ export interface Database {
       }
       profiles: {
         Row: {
-          approved: boolean
-          avatar_url: string | null
-          created_at: string
+          affiliation: string | null
           first_name: string | null
           id: string
           last_name: string | null
-          orcid_id: string | null
-          updated_at: string | null
           website: string | null
         }
         Insert: {
-          approved?: boolean
-          avatar_url?: string | null
-          created_at?: string
+          affiliation?: string | null
           first_name?: string | null
           id: string
           last_name?: string | null
-          orcid_id?: string | null
-          updated_at?: string | null
           website?: string | null
         }
         Update: {
-          approved?: boolean
-          avatar_url?: string | null
-          created_at?: string
+          affiliation?: string | null
           first_name?: string | null
           id?: string
           last_name?: string | null
-          orcid_id?: string | null
-          updated_at?: string | null
           website?: string | null
         }
         Relationships: [
@@ -92,13 +79,36 @@ export interface Database {
           }
         ]
       }
+      profiles_status: {
+        Row: {
+          id: string
+          verified: boolean
+        }
+        Insert: {
+          id: string
+          verified?: boolean
+        }
+        Update: {
+          id?: string
+          verified?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_status_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       submissions: {
         Row: {
           abstract: string | null
           collection_id: string
           created_at: string
           id: string
-          profile_id: string | null
+          profile_id: string
           title: string | null
         }
         Insert: {
@@ -106,7 +116,7 @@ export interface Database {
           collection_id: string
           created_at?: string
           id?: string
-          profile_id?: string | null
+          profile_id: string
           title?: string | null
         }
         Update: {
@@ -114,7 +124,7 @@ export interface Database {
           collection_id?: string
           created_at?: string
           id?: string
-          profile_id?: string | null
+          profile_id?: string
           title?: string | null
         }
         Relationships: [
@@ -134,6 +144,29 @@ export interface Database {
           }
         ]
       }
+      submissions_status: {
+        Row: {
+          id: string
+          status: Database["public"]["Enums"]["submission_status"]
+        }
+        Insert: {
+          id: string
+          status?: Database["public"]["Enums"]["submission_status"]
+        }
+        Update: {
+          id?: string
+          status?: Database["public"]["Enums"]["submission_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_status_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -142,7 +175,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      submission_status: "submitted" | "accepted" | "declined"
     }
     CompositeTypes: {
       [_ in never]: never

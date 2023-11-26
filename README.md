@@ -1,4 +1,4 @@
-# LatticeMeet
+# ScholarLattice
 
 ## Developing
 

@@ -14,7 +14,8 @@
 	export let data
 
 	$: collection = data.collection;
-	$: subcollections = collection.collections.sort((c:any,d:any)=>c.short_title.localeCompare(d.short_title))
+	$: description = data.collection.description || ""
+	// $: subcollections = collection.collections.sort((c:any,d:any)=>c.short_title.localeCompare(d.short_title)) : []
 	$: parent = data.parent;
 	$: submissions = data.submissions
 </script>
@@ -32,9 +33,9 @@
 	{/if}
 </p>
 
-<Markdown md={collection.description} {plugins}/>
+<Markdown md={description} {plugins}/>
 
-{#if subcollections.length > 0}
+<!-- {#if subcollections.length > 0}
 	<h3>Subcollections</h3>
 	<ul>
 		{#each subcollections as c }
@@ -46,16 +47,16 @@
 			</li>
 		{/each}
 	</ul>
-{:else}
+{:else} -->
 	<h3>Submit to this Collection</h3>
 	<p><a href={`/collections/${collection.id}/submit`}>Submissions are now open on this page.</a></p>
 	{#if submissions && submissions.length > 0}
 		<h3>Received Submissions</h3>
 		{#each submissions as submission}
 			<article>
-				<h4><Markdown md={submission.title} plugins={titlePlugins}/></h4>
-				<Markdown md={submission.abstract} {plugins}/>
+				<h4><Markdown md={submission.title || ""} plugins={titlePlugins}/></h4>
+				<Markdown md={submission.abstract || ""} {plugins}/>
 			</article>
 		{/each}
 	{/if}
-{/if}
+<!-- {/if} -->

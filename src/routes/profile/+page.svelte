@@ -2,9 +2,6 @@
 	import type { PageData } from './$types';
   	import { superForm } from 'sveltekit-superforms/client';
  	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-	import Avatar from '$lib/Avatar.svelte'
-
-	import ProfileFields from '$lib/ProfileFields.svelte';
 
 	export let data:PageData
 
@@ -12,8 +9,6 @@
 </script>
 
 <h2 style="margin-top:0">Your Profile</h2>
-
-<SuperDebug data={$form} />
 
 <form method="POST">
 	<fieldset>
@@ -34,7 +29,16 @@
 			bind:value={$form.last_name}
 			{...$constraints.last_name} />
 		{#if $errors.last_name}<span class="invalid">{$errors.last_name}</span>{/if}
-	  
+
+		<label for="affiliation">Affiliation</label>
+		<input
+			type="text"
+			name="affiliation"
+			aria-invalid={$errors.affiliation ? 'true' : undefined}
+			bind:value={$form.affiliation}
+			{...$constraints.affiliation} />
+		{#if $errors.affiliation}<span class="invalid">{$errors.affiliation}</span>{/if}
+		  
 		<label for="website">Website</label>
 		<input
 			type="url"
@@ -44,18 +48,12 @@
 			{...$constraints.website} />
 		{#if $errors.website}<span class="invalid">{$errors.website}</span>{/if}
 	  
-		<label for="orcid_id">ORCID ID</label>
-		<input
-			type="url"
-			name="orcid_id"
-			aria-invalid={$errors.orcid_id ? 'true' : undefined}
-			bind:value={$form.orcid_id}
-			{...$constraints.orcid_id} />
-		{#if $errors.orcid_id}<span class="invalid">{$errors.orcid_id}</span>{/if}
-	  
+
 		<div><button>Submit</button></div>
 	</fieldset>
 </form>
+
+<SuperDebug data={$form} />
 
 <style>
 	.invalid {

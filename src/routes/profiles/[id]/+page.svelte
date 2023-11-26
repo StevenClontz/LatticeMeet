@@ -5,7 +5,7 @@
 </script>
 
 <h2 style="margin-top:0">
-	Profiles
+	Profile
 </h2>
 
 <h3>{profile.first_name} {profile.last_name}</h3>

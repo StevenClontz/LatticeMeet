@@ -8,7 +8,7 @@
 	const { form, errors, constraints } = superForm(data.form);
 </script>
 
-<h2 style="margin-top:0">Your Profile</h2>
+<h2 style="margin-top:0">Edit Profile</h2>
 
 <form method="POST">
 	<fieldset>

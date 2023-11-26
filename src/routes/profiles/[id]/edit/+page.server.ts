@@ -2,14 +2,18 @@ import { fail, redirect, error } from '@sveltejs/kit'
 import { superValidate } from 'sveltekit-superforms/server';
 import { profileSchema } from '$lib/schema.js';
 
-export const load = async ({ locals: { supabase, getSession, getProfile } }) => {
+export const load = async ({ locals: { supabase, getSession }, params  }) => {
 	const session = await getSession()
 
 	if (!session) {
 		throw redirect(303, '/login')
 	}
 
-	const profile = await getProfile() 
+	const { data: profile } = await supabase
+		.from('profiles')
+		.select()
+		.eq(`id`, params.id)
+		.single()
 
 	if (profile === null) {
 		await supabase.auth.signOut()

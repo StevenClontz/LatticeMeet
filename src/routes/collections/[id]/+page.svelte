@@ -49,7 +49,7 @@
 	</ul>
 {:else} -->
 	<h3>Submit to this Collection</h3>
-	<p><a href={`/collections/${collection.id}/submit`}>Submissions are now open on this page.</a></p>
+	<p><a href={`/collections/${collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
 	{#if submissions && submissions.length > 0}
 		<h3>Received Submissions</h3>
 		{#each submissions as submission}

@@ -2,6 +2,8 @@
 	import { Markdown, type Plugin } from 'svelte-exmarkdown';
 	import rehypeKatex from 'rehype-katex';
 	import remarkMath from 'remark-math';
+    import CodeMirror from "svelte-codemirror-editor";
+    import { markdown } from "@codemirror/lang-markdown";
 
     export let errors: string[] | undefined
     export let constraints:  Partial<{
@@ -25,14 +27,19 @@
 </script>
 
 <div>
-    <label for={name}><slot/>
-    {#if errors}<span class="invalid">{errors}</span>{/if}</label>
-    <input
-        type="text"
-        {name}
-        aria-invalid={errors ? 'true' : undefined}
+    <span><slot/>
+    {#if errors}<span class="invalid">{errors}</span>{/if}</span>
+    <div style="margin-bottom:1rem"><CodeMirror 
         bind:value={value}
-        {...constraints} />
+        lang={markdown()}/>
+    </div>
+    <input 
+        {name}
+        type="hidden"
+        aria-invalid={errors ? 'true' : undefined}
+        {value}
+        {...constraints}/>
+    
     
     {#if preview === "md"}
         <div>

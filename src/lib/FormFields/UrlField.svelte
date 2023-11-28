@@ -13,14 +13,16 @@
     export let name: string
 </script>
 
-<label for={name}><slot/></label>
-<input
-    type="url"
-    {name}
-    aria-invalid={errors ? 'true' : undefined}
-    bind:value={value}
-    {...constraints} />
-{#if errors}<span class="invalid">{errors}</span>{/if}
+<div>
+    <label for={name}><slot/>
+    {#if errors}<span class="invalid">{errors}</span>{/if}</label>
+    <input
+        type="url"
+        {name}
+        aria-invalid={errors ? 'true' : undefined}
+        bind:value={value}
+        {...constraints} />
+</div>
 
 <style>
 	.invalid {

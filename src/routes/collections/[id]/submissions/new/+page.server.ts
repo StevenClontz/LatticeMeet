@@ -1,4 +1,6 @@
 import { fail, redirect, error } from '@sveltejs/kit'
+import { superValidate } from 'sveltekit-superforms/server';
+import { submissionSchema } from '$lib/schema.js';
 
 export const load = async ({ locals: { supabase, getSession, getProfile }, params }) => {
 	const session = await getSession()
@@ -9,7 +11,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 
 	const { data: collection } = await supabase
 		.from('collections')
-		.select(`*, collections(*)`)
+		.select(`*`)
 		.eq(`id`, params.id)
 		.single()
 	
@@ -24,15 +26,12 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		throw error(500, "Profile could not be loaded from server. Please try again.")
 	}
 
+	const form = await superValidate(
+		profile,
+		submissionSchema
+	);
 
-	const { data: submission } = await supabase
-		.from('submissions')
-		.select()
-		.eq(`profile_id`, session.user.id)
-		.eq(`collection_id`, params.id)
-		.single()
-
-	return { profile, collection, submission }
+	return { profile, collection, form }
 }
 
 export const actions = {

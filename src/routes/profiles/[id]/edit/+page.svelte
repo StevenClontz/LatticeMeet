@@ -3,6 +3,8 @@
   	import { superForm } from 'sveltekit-superforms/client';
  	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
+	import{ TextField, UrlField } from '$lib/FormFields';
+
 	export let data:PageData
 
 	const { form, errors, constraints } = superForm(data.form);
@@ -12,41 +14,37 @@
 
 <form method="POST">
 	<fieldset>
-		<label for="first_name">First Name</label>
-		<input
-			type="text"
+		<TextField
 			name="first_name"
-			aria-invalid={$errors.first_name ? 'true' : undefined}
+			errors={$errors["first_name"]}
 			bind:value={$form.first_name}
-			{...$constraints.first_name} />
-		{#if $errors.first_name}<span class="invalid">{$errors.first_name}</span>{/if}
-	  
-		<label for="last_name">Last Name</label>
-		<input
-			type="text"
-			name="last_name"
-			aria-invalid={$errors.last_name ? 'true' : undefined}
-			bind:value={$form.last_name}
-			{...$constraints.last_name} />
-		{#if $errors.last_name}<span class="invalid">{$errors.last_name}</span>{/if}
+			constraints={$constraints.first_name}>
+			First Name
+		</TextField>
 
-		<label for="affiliation">Affiliation</label>
-		<input
-			type="text"
+		<TextField
+			name="last_name"
+			errors={$errors.last_name}
+			bind:value={$form.last_name}
+			constraints={$constraints.last_name}>
+			Last Name
+		</TextField>
+
+		<TextField
 			name="affiliation"
-			aria-invalid={$errors.affiliation ? 'true' : undefined}
+			errors={$errors.affiliation}
 			bind:value={$form.affiliation}
-			{...$constraints.affiliation} />
-		{#if $errors.affiliation}<span class="invalid">{$errors.affiliation}</span>{/if}
-		  
-		<label for="website">Website</label>
-		<input
-			type="url"
+			constraints={$constraints.affiliation}>
+			Affiliation
+		</TextField>
+
+		<UrlField
 			name="website"
-			aria-invalid={$errors.website ? 'true' : undefined}
+			errors={$errors.website}
 			bind:value={$form.website}
-			{...$constraints.website} />
-		{#if $errors.website}<span class="invalid">{$errors.website}</span>{/if}
+			constraints={$constraints.website}>
+			Website
+		</UrlField>
 	  
 
 		<div><button>Submit</button></div>
@@ -55,8 +53,4 @@
 
 <SuperDebug data={$form} />
 
-<style>
-	.invalid {
-	  	color: red;
-	}
-</style>
+

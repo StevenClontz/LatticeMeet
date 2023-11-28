@@ -16,7 +16,7 @@
 	<fieldset>
 		<TextField
 			name="first_name"
-			errors={$errors["first_name"]}
+			errors={$errors.first_name}
 			bind:value={$form.first_name}
 			constraints={$constraints.first_name}>
 			First Name

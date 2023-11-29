@@ -15,6 +15,7 @@ export const load = async ({ locals: { supabase }, params }) => {
 	const { data: subcollections } = await supabase
 		.from('collections')
 		.select()
+		.order(`short_title`)
 		.eq(`parent_id`, params.id)
 	
 	if (subcollections === null) {
@@ -27,14 +28,14 @@ export const load = async ({ locals: { supabase }, params }) => {
 		.eq(`id`, collection.parent_id)
 		.single() : { data: null }
 
-	const { data: submissions } = await supabase
-		.from('submissions')
+	const { data: acceptedSubmissions } = await supabase
+		.from('accepted_submissions')
 		.select(`*`)
 		.eq(`collection_id`,params.id)
 	
-	if (submissions === null) {
+	if (acceptedSubmissions === null) {
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
 
-	return { collection, subcollections, parent, submissions }
+	return { collection, subcollections, parent, acceptedSubmissions }
 }

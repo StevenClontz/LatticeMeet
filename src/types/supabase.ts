@@ -99,6 +99,13 @@ export interface Database {
             isOneToOne: true
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_status_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -141,6 +148,13 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -162,6 +176,13 @@ export interface Database {
             foreignKeyName: "submissions_status_id_fkey"
             columns: ["id"]
             isOneToOne: true
+            referencedRelation: "accepted_submissions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_status_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
             referencedRelation: "submissions"
             referencedColumns: ["id"]
           }
@@ -169,7 +190,64 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      accepted_submissions: {
+        Row: {
+          abstract: string | null
+          affiliation: string | null
+          collection_id: string | null
+          collection_short_title: string | null
+          collection_title: string | null
+          first_name: string | null
+          id: string | null
+          last_name: string | null
+          profile_id: string | null
+          status: Database["public"]["Enums"]["submission_status"] | null
+          title: string | null
+          website: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      verified_profiles: {
+        Row: {
+          affiliation: string | null
+          first_name: string | null
+          id: string | null
+          last_name: string | null
+          verified: boolean | null
+          website: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
       [_ in never]: never

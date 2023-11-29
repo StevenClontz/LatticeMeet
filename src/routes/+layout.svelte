@@ -46,10 +46,7 @@
 		<nav>
 			<ul>
 				<li>
-					<a href="/">Home</a> 
-				</li>
-				<li>
-					<a href="/profiles">Profiles</a>
+					<a href="/">About</a> 
 				</li>
 				<li>
 					<a href="/collections">Collections</a>

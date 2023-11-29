@@ -54,8 +54,12 @@
 		<h3>Submissions</h3>
 		{#each submissions as submission}
 			<article>
-				<h4><Markdown md={submission.title || ""} plugins={titlePlugins}/></h4>
-				<Markdown md={submission.abstract || ""} {plugins}/>
+				<h3><Markdown md={submission.title || ""} plugins={titlePlugins}/></h3>
+				<p><a href={`/profiles/${submission.profile_id}`}>Submitter profile</a></p>
+				<h4>Abstract</h4>
+				<div>
+					<Markdown md={submission.abstract || ""} {plugins}/>
+				</div>
 			</article>
 		{/each}
 	{/if}

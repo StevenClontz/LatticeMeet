@@ -16,7 +16,8 @@
 	</a>
 </p>
 <p>
-	to be held in March 2024.
+	to be held in March 2024. Contact <a href="mailto:sclontz@southalabama.edu">Steven Clontz</a>
+	for more information.
 </p>
 
 <p>

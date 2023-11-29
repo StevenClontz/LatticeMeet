@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { dev } from '$app/environment';
   	import { superForm } from 'sveltekit-superforms/client';
  	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
@@ -69,4 +70,6 @@
 	</fieldset>
 </form>
 
-<SuperDebug data={$form} />
+{#if dev}
+	<SuperDebug data={$form} />
+{/if}

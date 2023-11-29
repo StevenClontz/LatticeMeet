@@ -19,7 +19,7 @@
     {/if}
 </p>
 
-{#if submissions }
+{#if submissions && submissions.length > 0}
 <h3>Submissions</h3>
 <ul>
 	{#each submissions as submission}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let data
-	$: supabase = data.supabase
+	$: submissions = data.submissions
 	$: profile = data.profile
 </script>
 
@@ -18,3 +18,16 @@
         <a href={profile.website}>Website</a>
     {/if}
 </p>
+
+{#if submissions }
+<h3>Submissions</h3>
+<ul>
+	{#each submissions as submission}
+		<li>
+			<a href={`/collections/${submission.collection_id}`}>
+				{submission.title}
+			</a>
+		</li>
+	{/each}
+</ul>
+{/if}

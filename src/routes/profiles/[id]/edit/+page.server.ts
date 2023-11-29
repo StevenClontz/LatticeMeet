@@ -57,7 +57,7 @@ export const actions = {
 			return fail(500, { form });
 		}
 
-		return { form };
+		throw redirect(303, `/profiles/${profileData.id}`)
 	},
 
 }

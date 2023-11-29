@@ -12,5 +12,10 @@ export const load = async ({ locals: { supabase }, params }) => {
 		throw error(500, "Profile could not be loaded from server. Please try again.")
 	}
 
-	return { profile }
+	const { data: submissions } = await supabase
+		.from('submissions')
+		.select('*')
+		.eq(`profile_id`, params.id)
+
+	return { profile, submissions }
 }

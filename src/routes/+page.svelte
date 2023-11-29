@@ -8,10 +8,14 @@
 	<a href="https://en.wikipedia.org/wiki/Science_gateway">
 		scientific gateway
 	</a>
-	designed for mathematicians. It is currently being piloted in support of the
-	<a href="/collections/6c4c01df-a9da-488f-8b8e-a4adde82d6c3">
-		57th Spring Topology and Dynamics Conference
+	designed for mathematicians. It is currently being piloted in support of
+</p>
+<p style="text-align:center">
+	<a href="/collections/e8ad2fb5-8824-4b18-abec-4c9743b51bdf">
+		The 57th Spring Topology and Dynamics Conference
 	</a>
+</p>
+<p>
 	to be held in March 2024.
 </p>
 

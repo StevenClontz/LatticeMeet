@@ -2,11 +2,13 @@ import { error } from '@sveltejs/kit'
 
 export const load = async ({ locals: { supabase }, params }) => {
 
-	const { data: collection } = await supabase
+	const collectionSupabase = await supabase
 		.from('collections')
 		.select(`*, collections(*)`)
 		.eq(`id`, params.id)
 		.single()
+	
+	const collection:any = collectionSupabase.data
 	
 	if (collection === null) {
 		throw error(500, "Collection could not be loaded from server. Please try again.")

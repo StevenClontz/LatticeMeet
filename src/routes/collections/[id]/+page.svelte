@@ -15,7 +15,7 @@
 
 	$: collection = data.collection;
 	$: description = data.collection.description || ""
-	// $: subcollections = collection.collections.sort((c:any,d:any)=>c.short_title.localeCompare(d.short_title)) : []
+	$: subcollections = collection.collections.sort((c:any,d:any)=>c.short_title.localeCompare(d.short_title))
 	$: parent = data.parent;
 	$: submissions = data.submissions
 </script>
@@ -35,7 +35,7 @@
 
 <Markdown md={description} {plugins}/>
 
-<!-- {#if subcollections.length > 0}
+{#if subcollections.length > 0}
 	<h3>Subcollections</h3>
 	<ul>
 		{#each subcollections as c }
@@ -47,7 +47,7 @@
 			</li>
 		{/each}
 	</ul>
-{:else} -->
+{:else}
 	<h3>Submit to this Collection</h3>
 	<p><a href={`/collections/${collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
 	{#if submissions && submissions.length > 0}
@@ -63,4 +63,4 @@
 			</article>
 		{/each}
 	{/if}
-<!-- {/if} -->
+{/if}

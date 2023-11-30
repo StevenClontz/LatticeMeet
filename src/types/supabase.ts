@@ -50,23 +50,23 @@ export interface Database {
       profiles: {
         Row: {
           affiliation: string | null
-          first_name: string | null
+          first_name: string
           id: string
-          last_name: string | null
+          last_name: string
           website: string | null
         }
         Insert: {
           affiliation?: string | null
-          first_name?: string | null
+          first_name: string
           id: string
-          last_name?: string | null
+          last_name: string
           website?: string | null
         }
         Update: {
           affiliation?: string | null
-          first_name?: string | null
+          first_name?: string
           id?: string
-          last_name?: string | null
+          last_name?: string
           website?: string | null
         }
         Relationships: [
@@ -92,54 +92,32 @@ export interface Database {
           id?: string
           verified?: boolean
         }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_status_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "full_profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "profiles_status_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "profiles_status_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "verified_profiles"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       submissions: {
         Row: {
-          abstract: string | null
+          abstract: string
           collection_id: string
           created_at: string
           id: string
           profile_id: string
-          title: string | null
+          title: string
         }
         Insert: {
-          abstract?: string | null
+          abstract: string
           collection_id: string
           created_at?: string
           id?: string
           profile_id: string
-          title?: string | null
+          title: string
         }
         Update: {
-          abstract?: string | null
+          abstract?: string
           collection_id?: string
           created_at?: string
           id?: string
           profile_id?: string
-          title?: string | null
+          title?: string
         }
         Relationships: [
           {
@@ -253,12 +231,12 @@ export interface Database {
       full_profiles: {
         Row: {
           affiliation: string | null
+          email: string | null
           first_name: string | null
           id: string | null
           last_name: string | null
           verified: boolean | null
           website: string | null
-          email: string | null
         }
         Relationships: [
           {

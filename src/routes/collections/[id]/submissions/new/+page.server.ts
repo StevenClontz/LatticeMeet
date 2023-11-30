@@ -38,7 +38,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.eq(`profile_id`, profile.id)
 		.single()
 
-	return { form, existingSubmission }
+	return { form, existingSubmission, collection }
 }
 
 export const actions = {
@@ -65,13 +65,11 @@ export const actions = {
 		}
 		console.log(profileData)
 
-		const supaProfile = await supabase
+		const { error: profileError } = await supabase
 			.from('profiles')
 			.upsert(profileData)
 			.select()
 			.single()
-
-		const profileError = supaProfile.error
 
 		const submissionData = {
 			title: form.data.title,
@@ -81,22 +79,16 @@ export const actions = {
 		}
 		console.log(submissionData)
 
-		const supaSubmission = await supabase
+		const { error: submissionError } = await supabase
 			.from('submissions')
 			.insert(submissionData)
 			.select()
 			.single()
 
-		const submissionError = supaSubmission.error
-
 		if (profileError || submissionError) {
 			console.log(profileError)
 			console.log(submissionError)
 			return fail(500, { form });
-		}
-
-		if (submissionError || profileError) {
-			return fail(500, { form })
 		}
 
 		throw redirect(303, `/collections/${params.id}`)

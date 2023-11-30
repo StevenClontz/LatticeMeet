@@ -9,15 +9,21 @@
 	export let data:PageData
 
 	const { form, errors, constraints } = superForm(data.form);
+
+	const handleSubmit = (e:Event) => {
+		if (!confirm("Do you want to submit? (Submissions cannot be edited later.)")) {
+			e.preventDefault();
+		}
+	}
 </script>
 
 {#if data.existingSubmission}
 	Your submission <i>{data.existingSubmission.title}</i> has been received.
 {:else}
 
-	<h2 style="margin-top:0">New Submission</h2>
+	<h2 style="margin-top:0">New Submission for {data.collection.short_title}: {data.collection.title}</h2>
 
-	<form method="POST">
+	<form method="POST" on:submit={handleSubmit}>
 		<fieldset>
 			<TextField
 				name="first_name"

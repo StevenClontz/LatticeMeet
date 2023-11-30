@@ -36,10 +36,10 @@
     
     {#if preview === "md"}
         <div>
-            <small><slot/> Preview (<code>$\LaTeX$</code> supported)</small>
-            <blockquote>
+            <small><slot/> Preview
+                <div style="padding:1em; border:1px solid #ddd">
                 <Markdown {md} {plugins}/>
-            </blockquote>
+            </div>
         </div>
     {/if}
 </div>

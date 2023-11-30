@@ -29,10 +29,14 @@
 <div>
     <span><slot/>
     {#if errors}<span class="invalid">{errors}</span>{/if}</span>
-    <div style="margin-bottom:1rem"><CodeMirror 
-        bind:value={value}
-        lang={markdown()}
-        lineWrapping/>
+    <div style="margin-bottom:1rem">
+        <CodeMirror 
+            bind:value={value}
+            lang={markdown()}
+            lineWrapping/>
+        <div style="text-align:right">
+            <small><a href="/markdown" target="_blank">Help</a></small>
+        </div>
     </div>
     <input 
         {name}
@@ -47,11 +51,10 @@
             <small>
                 <slot/> 
                 Preview
-                (<code>**Markdown**</code> with <code>$\LaTeX$</code> math typesetting supported)
             </small>
-            <blockquote>
+            <div style="padding:1em; border:1px solid #ddd">
                 <Markdown {md} {plugins}/>
-            </blockquote>
+            </div>
         </div>
     {/if}
 </div>

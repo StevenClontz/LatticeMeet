@@ -9,7 +9,7 @@
 	Profile
 </h2>
 
-{#if profile.id === userProfile.id }
+{#if userProfile && profile.id === userProfile.id }
 <p><a href={`/profiles/${profile.id}/edit`}>Edit your Profile</a></p>
 {/if}
 

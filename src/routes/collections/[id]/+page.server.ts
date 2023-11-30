@@ -39,12 +39,12 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 
 	const profile = await getProfile()
 
-	const { data: existingSubmission } = await supabase
+	const { data: existingSubmission } = profile ? await supabase
 		.from('submissions')
 		.select()
 		.eq(`collection_id`, params.id)
 		.eq(`profile_id`, profile.id)
-		.single()
+		.single() : { data: null }
 
 	return { collection, subcollections, parent, acceptedSubmissions, existingSubmission }
 }

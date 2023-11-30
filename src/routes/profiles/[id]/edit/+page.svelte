@@ -15,6 +15,9 @@
 
 <form method="POST">
 	<fieldset>
+		<label for="email">Email</label>
+		<input name="email" disabled type="text" value={data.profile?.email}/>
+
 		<TextField
 			name="first_name"
 			errors={$errors.first_name}

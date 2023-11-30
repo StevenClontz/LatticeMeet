@@ -6,7 +6,7 @@ declare global {
 		interface Locals {
 			supabase: SupabaseClient<Database>
 			getSession(): Promise<Session | null>
-			getProfile(): Promise<Database["public"]["Tables"]["profiles"]["Row"] | null>
+			getProfile(): Promise<Database["public"]["Tables"]["full_profiles"]["Row"] | null>
 		}
 		interface PageData {
 			session: Session | null

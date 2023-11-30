@@ -31,7 +31,14 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		submissionSchema
 	);
 
-	return { form }
+	const { data: existingSubmission } = await supabase
+		.from('submissions')
+		.select()
+		.eq(`collection_id`, params.id)
+		.eq(`profile_id`, profile.id)
+		.single()
+
+	return { form, existingSubmission }
 }
 
 export const actions = {

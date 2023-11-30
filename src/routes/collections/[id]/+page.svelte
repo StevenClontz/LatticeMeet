@@ -42,7 +42,11 @@
 	</ul>
 {:else}
 	<h3>Submit to this Collection</h3>
-	<p><a href={`/collections/${data.collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
+	{#if !data.existingSubmission}
+		<p><a href={`/collections/${data.collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
+	{:else}
+    	Your submission <i>{data.existingSubmission.title}</i> has been received.
+	{/if}
 	{#if data.acceptedSubmissions && data.acceptedSubmissions.length > 0}
 		<h3>Accepted Submissions</h3>
 		{#each data.acceptedSubmissions as submission}

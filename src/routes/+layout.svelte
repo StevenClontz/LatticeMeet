@@ -53,13 +53,19 @@
 				</li>
 				{#if session && profile}
 					<li>
-						<a href={`/profiles/${profile.id}/edit`}>{session.user.email}</a>
+						{#if profile.verified}
+							<UserBadgeCheckIcon/>
+						{:else}
+							<UserIcon/>
+						{/if}
+						<a href={`/profiles/${profile.id}`}>{session.user.email}</a>
 					</li>
 					<li>
 						<button style="padding:0 0.5em;margin:0" on:click={handleSignOut}>Sign out</button> 
 					</li>
 				{:else}
 					<li>
+						<UserIcon/>
 						<a href="/login">Login</a>
 					</li>
 				{/if}

@@ -97,6 +97,13 @@ export interface Database {
             foreignKeyName: "profiles_status_id_fkey"
             columns: ["id"]
             isOneToOne: true
+            referencedRelation: "full_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_status_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
@@ -140,6 +147,13 @@ export interface Database {
             columns: ["collection_id"]
             isOneToOne: false
             referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "full_profiles"
             referencedColumns: ["id"]
           },
           {
@@ -224,7 +238,34 @@ export interface Database {
             foreignKeyName: "submissions_profile_id_fkey"
             columns: ["profile_id"]
             isOneToOne: false
+            referencedRelation: "full_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "submissions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
             referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      full_profiles: {
+        Row: {
+          affiliation: string | null
+          first_name: string | null
+          id: string | null
+          last_name: string | null
+          verified: boolean | null
+          website: string | null
+          email: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]

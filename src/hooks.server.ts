@@ -19,7 +19,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     const session = await event.locals.getSession()
     if (session) {
       const { data: profile  } = await event.locals.supabase
-        .from('profiles')
+        .from('full_profiles')
         .select()
         .eq('id', session.user.id)
         .single() 

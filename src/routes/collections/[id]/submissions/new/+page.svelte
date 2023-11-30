@@ -11,65 +11,71 @@
 	const { form, errors, constraints } = superForm(data.form);
 </script>
 
-<h2 style="margin-top:0">New Submission</h2>
+{#if data.existingSubmission}
+	Your submission <i>{data.existingSubmission.title}</i> has been received.
+{:else}
 
-<form method="POST">
-	<fieldset>
-		<TextField
-			name="first_name"
-			errors={$errors.first_name}
-			bind:value={$form.first_name}
-			constraints={$constraints.first_name}>
-			First Name
-		</TextField>
+	<h2 style="margin-top:0">New Submission</h2>
 
-		<TextField
-			name="last_name"
-			errors={$errors.last_name}
-			bind:value={$form.last_name}
-			constraints={$constraints.last_name}>
-			Last Name
-		</TextField>
+	<form method="POST">
+		<fieldset>
+			<TextField
+				name="first_name"
+				errors={$errors.first_name}
+				bind:value={$form.first_name}
+				constraints={$constraints.first_name}>
+				First Name
+			</TextField>
 
-		<TextField
-			name="affiliation"
-			errors={$errors.affiliation}
-			bind:value={$form.affiliation}
-			constraints={$constraints.affiliation}>
-			Affiliation
-		</TextField>
+			<TextField
+				name="last_name"
+				errors={$errors.last_name}
+				bind:value={$form.last_name}
+				constraints={$constraints.last_name}>
+				Last Name
+			</TextField>
 
-		<UrlField
-			name="website"
-			errors={$errors.website}
-			bind:value={$form.website}
-			constraints={$constraints.website}>
-			Website
-		</UrlField>
+			<TextField
+				name="affiliation"
+				errors={$errors.affiliation}
+				bind:value={$form.affiliation}
+				constraints={$constraints.affiliation}>
+				Affiliation
+			</TextField>
 
-		<TextField
-			name="title"
-			preview="md"
-			errors={$errors.title}
-			bind:value={$form.title}
-			constraints={$constraints.title}>
-			Title
-		</TextField>
+			<UrlField
+				name="website"
+				errors={$errors.website}
+				bind:value={$form.website}
+				constraints={$constraints.website}>
+				Website
+			</UrlField>
 
-		<CodeMirrorField
-			name="abstract"
-			preview="md"
-			errors={$errors.abstract}
-			bind:value={$form.abstract}
-			constraints={$constraints.abstract}>
-			Abstract
-		</CodeMirrorField>
-	  
+			<TextField
+				name="title"
+				preview="md"
+				errors={$errors.title}
+				bind:value={$form.title}
+				constraints={$constraints.title}>
+				Title
+			</TextField>
 
-		<div><button>Submit</button></div>
-	</fieldset>
-</form>
+			<CodeMirrorField
+				name="abstract"
+				preview="md"
+				errors={$errors.abstract}
+				bind:value={$form.abstract}
+				constraints={$constraints.abstract}>
+				Abstract
+			</CodeMirrorField>
+		
 
-{#if dev}
-	<SuperDebug data={$form} />
+			<div><button>Submit</button></div>
+		</fieldset>
+	</form>
+
+	{#if dev}
+		<SuperDebug data={$form} />
+	{/if}
+
 {/if}

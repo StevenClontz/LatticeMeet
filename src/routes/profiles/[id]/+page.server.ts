@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit'
 
-export const load = async ({ locals: { supabase }, params }) => {
+export const load = async ({ locals: { supabase, getProfile  }, params }) => {
 
 	const { data: profile } = await supabase
-		.from('profiles')
+		.from('full_profiles')
 		.select()
 		.eq(`id`, params.id)
 		.single()
@@ -14,8 +14,10 @@ export const load = async ({ locals: { supabase }, params }) => {
 
 	const { data: submissions } = await supabase
 		.from('submissions')
-		.select('*')
+		.select()
 		.eq(`profile_id`, params.id)
 
-	return { profile, submissions }
+	const userProfile = await getProfile()
+
+	return { profile, submissions, userProfile }
 }

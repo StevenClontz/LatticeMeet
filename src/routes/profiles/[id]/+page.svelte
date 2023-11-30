@@ -1,23 +1,37 @@
 <script lang="ts">
+    import { UserIcon } from '@indaco/svelte-iconoir/user';
+    import { UserBadgeCheckIcon } from '@indaco/svelte-iconoir/user-badge-check';
 	export let data
-	$: submissions = data.submissions
-	$: profile = data.profile
+	const {submissions, profile, userProfile } = data
 </script>
 
 <h2 style="margin-top:0">
 	Profile
 </h2>
 
-<h3>{profile.first_name} {profile.last_name}</h3>
+{#if profile.id === userProfile.id }
+<p><a href={`/profiles/${profile.id}/edit`}>Edit your Profile</a></p>
+{/if}
+
+<h3>
+	{profile.first_name} {profile.last_name}
+	{#if profile.verified}
+		<span title="Verified"><UserBadgeCheckIcon/></span>
+	{:else}
+		<UserIcon/>
+	{/if}
+</h3>
 {#if profile.affiliation && profile.affiliation !== ""}
 	<h4>{profile.affiliation}</h4>
 {/if}
-
-<p>
+<ul>
+	<li>
+		<a href={`mailto:${profile.email}`}>{profile.email}</a>
+	</li>
     {#if profile.website && profile.website !== ""}
-        <a href={profile.website}>Website</a>
+        <li><a href={profile.website}>{profile.website}</a></li>
     {/if}
-</p>
+</ul>
 
 {#if submissions && submissions.length > 0}
 <h3>Submissions</h3>

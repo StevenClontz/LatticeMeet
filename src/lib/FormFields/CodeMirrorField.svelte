@@ -31,7 +31,8 @@
     {#if errors}<span class="invalid">{errors}</span>{/if}</span>
     <div style="margin-bottom:1rem"><CodeMirror 
         bind:value={value}
-        lang={markdown()}/>
+        lang={markdown()}
+        lineWrapping/>
     </div>
     <input 
         {name}
@@ -43,7 +44,11 @@
     
     {#if preview === "md"}
         <div>
-            <small><slot/> Preview (<code>$\LaTeX$</code> supported)</small>
+            <small>
+                <slot/> 
+                Preview
+                (<code>**Markdown**</code> with <code>$\LaTeX$</code> math typesetting supported)
+            </small>
             <blockquote>
                 <Markdown {md} {plugins}/>
             </blockquote>

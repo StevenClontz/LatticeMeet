@@ -27,6 +27,12 @@ To create multiple paragarphs, insert a blank line between the paragraphs.
 	for mathematical typesetting. The editor below can be used to practice.
 </p>
 
+<p>
+	<small>
+		(Note: some math notation may not render correctly in some browsers - we're working to fix this!)
+	</small>
+</p>
+
 <hr/>
 
 <div>

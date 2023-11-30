@@ -50,7 +50,7 @@
         <div>
             <small>
                 <slot/> 
-                Preview
+                Preview (Note: some math notation may not render correctly in some browsers)
             </small>
             <div style="padding:1em; border:1px solid #ddd">
                 <Markdown {md} {plugins}/>

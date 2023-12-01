@@ -7,15 +7,8 @@
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
     import { markdown } from "@codemirror/lang-markdown";
-	let md = `
-## Sample Markdown text
-
-Markdown supports [links](https://topology.pi-base.org), **bold** and
-*italics*, and $\\LaTeX$ mathematical typesetting:
-$x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$.
-
-To create multiple paragarphs, insert a blank line between the paragraphs.
-	`.trim()
+	import mdSample from './sample.md?raw'
+	let md = mdSample.trim()
 </script>
 
 <h3>Using Markdown + LaTeX</h3>

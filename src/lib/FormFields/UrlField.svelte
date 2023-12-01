@@ -14,7 +14,7 @@
 </script>
 
 <div>
-    <label for={name}><slot/>
+    <label for={name}><slot/> (include <code>http://</code> or <code>https://</code>)
     {#if errors}<span class="invalid">{errors}</span>{/if}</label>
     <input
         type="url"

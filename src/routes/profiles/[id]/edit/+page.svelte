@@ -15,7 +15,7 @@
 
 <form method="POST">
 	<fieldset>
-		<label for="email">Email</label>
+		<label for="email">Account Email</label>
 		<input name="email" disabled type="text" value={data.profile?.email}/>
 
 		<TextField

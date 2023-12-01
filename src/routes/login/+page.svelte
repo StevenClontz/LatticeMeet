@@ -4,6 +4,10 @@
 	import { page } from '$app/stores';
 
 	export let data
+
+	const redirectTo = $page.url.searchParams.get("redirectTo") ?
+		`${$page.url.origin}/login/callback?redirectTo=${$page.url.searchParams.get("redirectTo")}` :
+		`${$page.url.origin}/login/callback`
 </script>
 
 <h3 style="margin-top:0">Login</h3>
@@ -16,7 +20,7 @@
 		<Auth
 			supabaseClient={data.supabase}
 			view="magic_link"
-			redirectTo={`${$page.url.origin}/login/callback`}
+			{redirectTo}
 			showLinks={false}
 			appearance={{ theme: ThemeSupa, style: { input: 'color: #000' } }}
 		/>

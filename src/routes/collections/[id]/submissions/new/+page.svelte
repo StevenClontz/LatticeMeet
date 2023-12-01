@@ -23,6 +23,8 @@
 
 	<h2 style="margin-top:0">New Submission for {data.collection.short_title}: {data.collection.title}</h2>
 
+	<p><small><a href={`/collections/${data.collection.id}`}>[Back to {data.collection.short_title}]</a></small></p>
+
 	<form method="POST" on:submit={handleSubmit}>
 		<fieldset>
 			<TextField

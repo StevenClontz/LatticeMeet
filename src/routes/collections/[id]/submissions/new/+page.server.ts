@@ -6,7 +6,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	const session = await getSession()
 
 	if (!session) {
-		throw redirect(303, '/login')
+		throw redirect(303, `/login?redirectTo=/collections/${params.id}/submissions/new`)
 	}
 
 	const { data: collection } = await supabase

@@ -67,7 +67,7 @@
 <div>
 	Update your Gravatar at <a href="https://gravatar.com/" target="_blank">Gravatar.com</a>.
 	<div style="text-align:center">
-		<Gravatar email="steven.clontz@gmail.com" size={150} rating="pg"/>
+		<Gravatar email={data.profile.email} size={150} rating="pg"/>
 	</div>
 </div>
 

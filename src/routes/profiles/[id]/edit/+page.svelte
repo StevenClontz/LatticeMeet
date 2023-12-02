@@ -65,7 +65,9 @@
 <hr/>
 
 <div>
-	Update your Gravatar at <a href="https://gravatar.com/" target="_blank">Gravatar.com</a>.
+	Update the Gravatar associated with
+	<code>{data.profile.email}</code>
+	at <a href="https://gravatar.com/" target="_blank">Gravatar.com</a>.
 	<div style="text-align:center">
 		<Gravatar email={data.profile.email} size={150} rating="pg"/>
 	</div>

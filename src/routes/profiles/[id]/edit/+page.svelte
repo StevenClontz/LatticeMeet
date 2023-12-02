@@ -3,6 +3,7 @@
 	import { dev } from '$app/environment';
   	import { superForm } from 'sveltekit-superforms/client';
  	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+  	import Gravatar from '$lib/Gravatar.svelte'
 
 	import{ TextField, UrlField } from '$lib/FormFields';
 
@@ -15,8 +16,10 @@
 
 <form method="POST">
 	<fieldset>
-		<label for="email">Account Email</label>
-		<input name="email" disabled type="text" value={data.profile?.email}/>
+		<label>
+			Account Email
+			<input name="email" disabled type="text" value={data.profile?.email}/>
+		</label>
 
 		<TextField
 			name="first_name"
@@ -58,5 +61,14 @@
 {#if dev}
 	<SuperDebug data={$form} />
 {/if}
+
+<hr/>
+
+<div>
+	Update your Gravatar at <a href="https://gravatar.com/" target="_blank">Gravatar.com</a>.
+	<div style="text-align:center">
+		<Gravatar email="steven.clontz@gmail.com" size={150} rating="pg"/>
+	</div>
+</div>
 
 

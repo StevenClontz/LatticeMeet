@@ -1,16 +1,21 @@
 <script lang="ts">
-    import { UserIcon } from '@indaco/svelte-iconoir/user';
-    import { UserBadgeCheckIcon } from '@indaco/svelte-iconoir/user-badge-check';
+    import { UserIcon } from '@indaco/svelte-iconoir/user'
+    import { UserBadgeCheckIcon } from '@indaco/svelte-iconoir/user-badge-check'
+  	import Gravatar from '$lib/Gravatar.svelte'
 	export let data
 	const {submissions, profile, userProfile } = data
 </script>
+
+<div style="display:inline-block;float:right">
+	<Gravatar email={profile.email} size={150} rating="pg"/>
+</div>
 
 <h2 style="margin-top:0">
 	Profile
 </h2>
 
 {#if userProfile && profile.id === userProfile.id }
-<p><a href={`/profiles/${profile.id}/edit`}>Edit your Profile</a></p>
+	<p><a href={`/profiles/${profile.id}/edit`}>Edit your Profile</a></p>
 {/if}
 
 <h3>

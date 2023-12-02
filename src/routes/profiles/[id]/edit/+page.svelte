@@ -65,12 +65,14 @@
 <hr/>
 
 <div>
-	Update the Gravatar associated with
-	<code>{data.profile.email}</code>
-	at <a href="https://gravatar.com/" target="_blank">Gravatar.com</a>.
-	<div style="text-align:center">
+	<p>
+		Update the Gravatar associated with
+		<code>{data.profile.email}</code>
+		at <a href="https://gravatar.com/" target="_blank">Gravatar.com</a>.
+	</p>
+	<p style="text-align:center">
 		<Gravatar email={data.profile.email} size={150} rating="pg"/>
-	</div>
+	</p>
 </div>
 
 

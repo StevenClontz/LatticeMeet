@@ -15,6 +15,15 @@
 	Enter your email address below and click "Send Magic Link".
 	Use the link that is emailed to you to login.
 </p>
+<p>
+	<small>
+We're receiving a small number of reports that certain email addresses/domains may
+be blocked by our authentication service. If this happens to you, please
+email <a href="mailto:sclontz@southalabama.edu">Steven Clontz</a> to
+let us know. You can also try submitting using a personal email address
+instead.
+	</small>
+</p>
 <div class="row flex-center flex">
 	<div class="col-6 form-widget">
 		<Auth

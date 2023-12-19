@@ -13,7 +13,9 @@
 <h3 style="margin-top:0">Login</h3>
 <p>
 	Enter your email address below and click "Send Magic Link".
-	Use the link that is emailed to you to login.
+	Use the link that is emailed to you from 
+	<code>noreply@mail.app.supabase.io</code>
+	to login (check your Spam folder).
 </p>
 <p>
 	<small>

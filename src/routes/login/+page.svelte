@@ -15,7 +15,7 @@
 	Enter your email address below and click "Send Magic Link".
 	Use the link that is emailed to you from 
 	<code>noreply@mail.app.supabase.io</code>
-	to login (check your Spam folder).
+	to login (check your Spam/Junk folder).
 </p>
 <p>
 	<small>

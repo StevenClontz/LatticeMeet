@@ -19,11 +19,9 @@
 </p>
 <p>
 	<small>
-We're receiving a small number of reports that certain email addresses/domains may
-be blocked by our authentication service. If this happens to you, please
-email <a href="mailto:sclontz@southalabama.edu">Steven Clontz</a> to
-let us know. You can also try submitting using a personal email address
-instead.
+Note: We're aware of an issue that's preventing Outlook email addresses
+from using their Magic Link. Please use an alternate email address or
+check back soon once the issue is resolved.
 	</small>
 </p>
 <div class="row flex-center flex">

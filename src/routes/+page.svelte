@@ -6,7 +6,7 @@
 	<strong>What's this?</strong>
 	{appTitle} is an early preview of an upcoming 
 	<a href="https://en.wikipedia.org/wiki/Science_gateway">
-		scientific gateway
+		science gateway
 	</a>
 	designed for mathematicians. It is currently being piloted in support of
 </p>

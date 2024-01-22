@@ -65,7 +65,7 @@
 				errors={$errors.title}
 				bind:value={$form.title}
 				constraints={$constraints.title}>
-				Title
+				Submission Title
 			</TextField>
 
 			<CodeMirrorField
@@ -74,7 +74,7 @@
 				errors={$errors.abstract}
 				bind:value={$form.abstract}
 				constraints={$constraints.abstract}>
-				Abstract
+				Submission Abstract
 			</CodeMirrorField>
 		
 

@@ -47,12 +47,13 @@
     
     
     {#if preview === "md"}
-        <div>
-            <small>
+        <div style="padding:1em; border-radius:1rem; background-color:#f8f8f8; margin: 1.125rem;">
+            <small style="color:#888">
                 <slot/> 
                 Preview (Note: some math notation may not render correctly in some browsers)
             </small>
-            <div style="padding:1em; border:1px solid #ddd">
+            <hr style="border-bottom: 1px solid #aaa;"/>
+            <div>
                 <Markdown {md} {plugins}/>
             </div>
         </div>

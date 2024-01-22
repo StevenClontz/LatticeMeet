@@ -18,6 +18,7 @@ export interface Database {
           short_title: string | null
           title: string | null
           website: string | null
+          open_registration: boolean
         }
         Insert: {
           created_at?: string
@@ -27,6 +28,7 @@ export interface Database {
           short_title?: string | null
           title?: string | null
           website?: string | null
+          open_registration?: boolean
         }
         Update: {
           created_at?: string
@@ -36,6 +38,7 @@ export interface Database {
           short_title?: string | null
           title?: string | null
           website?: string | null
+          open_registration?: boolean
         }
         Relationships: [
           {

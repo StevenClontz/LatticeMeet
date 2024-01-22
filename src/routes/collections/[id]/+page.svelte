@@ -28,6 +28,15 @@
 
 <Markdown md={data.collection.description || ""} {plugins}/>
 
+{#if data.collection.open_registration}
+	<h3>Register</h3>
+	<p>
+		<a href={`/collections/${data.collection.id}/registrations/new`}>
+			Register for {data.collection.short_title} using this form.
+		</a>
+	</p>
+{/if}
+
 {#if data.subcollections.length > 0}
 	<h3>Subcollections</h3>
 	<ul>

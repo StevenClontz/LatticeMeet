@@ -23,3 +23,15 @@ export const submissionSchema = z.object({
     first_name: true,
     last_name: true,
 });
+
+export const registrationSchema = z.object({
+    registration_option_id: z.string().trim(),
+    first_name: z.string().min(1).trim(),
+    last_name: z.string().min(1).trim(),
+    website: z.string().url().nullable(),
+    affiliation: z.string().nullable(),
+}).required({
+    registration_option_id: true,
+    first_name: true,
+    last_name: true,
+});

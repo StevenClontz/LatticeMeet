@@ -28,7 +28,7 @@
 
 <Markdown md={data.collection.description || ""} {plugins}/>
 
-{#if data.collection.open_registration}
+{#if data.registration_options.length > 0}
 	<h3>Register</h3>
 	<p>
 		<a href={`/collections/${data.collection.id}/registrations/new`}>

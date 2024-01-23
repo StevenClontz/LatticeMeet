@@ -36,6 +36,15 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 	if (acceptedSubmissions === null) {
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
+	
+	const { data: registration_options } = await supabase
+		.from('registration_options')
+		.select()
+		.eq(`collection_id`, params.id)
+	
+	if (registration_options === null) {
+		throw error(500, "Collection could not be loaded from server. Please try again.")
+	}
 
 	const profile = await getProfile()
 
@@ -46,5 +55,5 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.eq(`profile_id`, profile.id)
 		.single() : { data: null }
 
-	return { collection, subcollections, parent, acceptedSubmissions, existingSubmission }
+	return { collection, subcollections, parent, acceptedSubmissions, existingSubmission, registration_options }
 }

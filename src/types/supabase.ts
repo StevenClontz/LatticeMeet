@@ -14,31 +14,31 @@ export interface Database {
           created_at: string
           description: string | null
           id: string
+          open_registration: boolean
           parent_id: string | null
           short_title: string | null
           title: string | null
           website: string | null
-          open_registration: boolean
         }
         Insert: {
           created_at?: string
           description?: string | null
           id?: string
+          open_registration?: boolean
           parent_id?: string | null
           short_title?: string | null
           title?: string | null
           website?: string | null
-          open_registration?: boolean
         }
         Update: {
           created_at?: string
           description?: string | null
           id?: string
+          open_registration?: boolean
           parent_id?: string | null
           short_title?: string | null
           title?: string | null
           website?: string | null
-          open_registration?: boolean
         }
         Relationships: [
           {
@@ -115,6 +115,88 @@ export interface Database {
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      registration_options: {
+        Row: {
+          collection_id: string
+          created_at: string
+          description: string
+          id: string
+          title: string
+        }
+        Insert: {
+          collection_id: string
+          created_at?: string
+          description?: string
+          id?: string
+          title?: string
+        }
+        Update: {
+          collection_id?: string
+          created_at?: string
+          description?: string
+          id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_options_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      registrations: {
+        Row: {
+          created_at: string
+          id: number
+          profile_id: string
+          registration_option_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          profile_id: string
+          registration_option_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          profile_id?: string
+          registration_option_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registrations_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "full_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "registrations_registration_option_id_fkey"
+            columns: ["registration_option_id"]
+            isOneToOne: false
+            referencedRelation: "registration_options"
             referencedColumns: ["id"]
           }
         ]
@@ -257,9 +339,9 @@ export interface Database {
         Row: {
           affiliation: string | null
           email: string | null
-          first_name: string
+          first_name: string | null
           id: string | null
-          last_name: string
+          last_name: string | null
           verified: boolean | null
           website: string | null
         }

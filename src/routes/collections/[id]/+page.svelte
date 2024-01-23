@@ -8,17 +8,15 @@
 
 	export let data
 	
-	let { 
-		collection, 
-		subcollections, 
-		parent, 
-		acceptedSubmissions, 
-		existingSubmission, 
-		registration_options,
-		existingRegistration
-	} = data
+	$: collection = data.collection
+    $: subcollections = data.subcollections
+    $: parent = data.parent
+    $: acceptedSubmissions = data.acceptedSubmissions
+    $: existingSubmission = data.existingSubmission
+    $: existingRegistration = data.existingRegistration
+    $: registration_options = data.registration_options
 
-	let existingRegistrationOption = 
+	$: existingRegistrationOption = 
 		registration_options.find(ro=>ro.id===existingRegistration?.registration_option_id) || null
 
 </script>

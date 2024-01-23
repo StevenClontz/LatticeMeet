@@ -54,6 +54,23 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.eq(`collection_id`, params.id)
 		.eq(`profile_id`, profile.id)
 		.single() : { data: null }
+	
+	const { data: existingRegistration } = profile ? await supabase
+		.from('registrations')
+		.select()
+		.in('registration_option_id', registration_options.map(ro=>ro.id))
+		.eq(`profile_id`, profile.id)
+		.single() : { data: null }
+	
+	console.log(existingRegistration)
 
-	return { collection, subcollections, parent, acceptedSubmissions, existingSubmission, registration_options }
+	return { 
+		collection, 
+		subcollections, 
+		parent, 
+		acceptedSubmissions, 
+		existingSubmission, 
+		registration_options,
+		existingRegistration
+	}
 }

@@ -7,40 +7,61 @@
 	];
 
 	export let data
+	
+	let { 
+		collection, 
+		subcollections, 
+		parent, 
+		acceptedSubmissions, 
+		existingSubmission, 
+		registration_options,
+		existingRegistration
+	} = data
+
+	let existingRegistrationOption = 
+		registration_options.find(ro=>ro.id===existingRegistration?.registration_option_id) || null
+
 </script>
 
 
-{#if data.parent}
+{#if parent}
 	<p>
-		<small>[<a style="color:#444444" href={`/collections/${data.parent.id}`}>Go back to {data.parent.short_title}</a>]</small>
+		<small>[<a style="color:#444444" href={`/collections/${parent.id}`}>Go back to {parent.short_title}</a>]</small>
 	</p>
 {/if}
 
 <h2 style="margin-top:0">
-	{data.collection.short_title}: {data.collection.title}
+	{collection.short_title}: {collection.title}
 </h2>
 
-{#if data.collection.website && data.collection.website !== ""}
+{#if collection.website && collection.website !== ""}
 	<p>
-		<small>[<a style="color:#444444" href={data.collection.website}>Website</a>]</small>
+		<small>[<a style="color:#444444" href={collection.website}>Website</a>]</small>
 	</p>
 {/if}
 
-<Markdown md={data.collection.description || ""} {plugins}/>
+<Markdown md={collection.description || ""} {plugins}/>
 
-{#if data.registration_options.length > 0}
+{#if registration_options.length > 0}
 	<h3>Register</h3>
-	<p>
-		<a href={`/collections/${data.collection.id}/registrations/new`}>
-			Register for {data.collection.short_title} using this form.
-		</a>
-	</p>
+	{#if existingRegistration}
+		<p>
+			You have registered as <b>{existingRegistrationOption?.title}</b>.
+			Please contact administrators to change your registration.
+		</p>
+	{:else}
+		<p>
+			<a href={`/collections/${collection.id}/registrations/new`}>
+				Register for {collection.short_title} using this form.
+			</a>
+		</p>
+	{/if}
 {/if}
 
-{#if data.subcollections.length > 0}
+{#if subcollections.length > 0}
 	<h3>Subcollections</h3>
 	<ul>
-		{#each data.subcollections as c }
+		{#each subcollections as c }
 			<li>
 				<h4 style="margin:0">{c.short_title}</h4>
 				<div>
@@ -51,14 +72,14 @@
 	</ul>
 {:else}
 	<h3>Submit to this Collection</h3>
-	{#if !data.existingSubmission}
-		<p><a href={`/collections/${data.collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
+	{#if !existingSubmission}
+		<p><a href={`/collections/${collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
 	{:else}
-    	Your submission <i>{data.existingSubmission.title}</i> has been received.
+    	Your submission <i>{existingSubmission.title}</i> has been received.
 	{/if}
-	{#if data.acceptedSubmissions && data.acceptedSubmissions.length > 0}
+	{#if acceptedSubmissions && acceptedSubmissions.length > 0}
 		<h3>Accepted Submissions</h3>
-		{#each data.acceptedSubmissions as submission}
+		{#each acceptedSubmissions as submission}
 			<article>
 				<h3><Markdown md={submission.title || ""} {plugins}/></h3>
 				<p>

@@ -154,19 +154,19 @@ export interface Database {
       registrations: {
         Row: {
           created_at: string
-          id: number
+          id: string
           profile_id: string
           registration_option_id: string
         }
         Insert: {
           created_at?: string
-          id?: number
+          id?: string
           profile_id: string
           registration_option_id: string
         }
         Update: {
           created_at?: string
-          id?: number
+          id?: string
           profile_id?: string
           registration_option_id?: string
         }

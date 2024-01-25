@@ -73,7 +73,14 @@
 	{#if !existingSubmission}
 		<p><a href={`/collections/${collection.id}/submissions/new`}>Submissions are now open on this page.</a></p>
 	{:else}
-    	Your submission <i>{existingSubmission.title}</i> has been received.
+    	<p>Your submission has been received:.</p>
+		<article>
+			<h3><Markdown md={existingSubmission.title || ""} {plugins}/></h3>
+			<h4>Abstract</h4>
+			<div>
+				<Markdown md={existingSubmission.abstract || ""} {plugins}/>
+			</div>
+		</article>
 	{/if}
 	{#if acceptedSubmissions && acceptedSubmissions.length > 0}
 		<h3>Accepted Submissions</h3>

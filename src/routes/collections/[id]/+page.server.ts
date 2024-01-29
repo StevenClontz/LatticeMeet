@@ -62,6 +62,8 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.eq(`profile_id`, profile.id)
 		.single() : { data: null }
 
+	const {data: isAdmin} = profile ? await supabase.rpc("is_admin_of", {_profile_id: profile.id, _collection_id: params.id}) : {data: false}
+
 	return { 
 		collection, 
 		subcollections, 
@@ -69,6 +71,7 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		acceptedSubmissions, 
 		existingSubmission, 
 		registration_options,
-		existingRegistration
+		existingRegistration,
+		isAdmin
 	}
 }

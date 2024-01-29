@@ -2,31 +2,34 @@ import { error } from '@sveltejs/kit'
 
 export const load = async ({ locals: { supabase, getProfile }, params }) => {
 
-	const { data: collection } = await supabase
+	const { data: collection, error: e } = await supabase
 		.from('collections')
 		.select()
 		.eq(`id`, params.id)
 		.single()
 	
 	if (collection === null) {
+		console.log(e)
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
 	
-	const { data: registration_options } = await supabase
+	const { data: registration_options, error: e2 } = await supabase
 		.from('registration_options')
 		.select()
 		.eq(`collection_id`, params.id)
 	
 	if (registration_options === null) {
+		console.log(e2)
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
 	
-	const { data: submissions } = await supabase
+	const { data: submissions, error: e3 } = await supabase
 		.from('submissions')
 		.select()
 		.eq(`collection_id`, params.id)
 	
 	if (submissions === null) {
+		console.log(e3)
 		throw error(500, "Collection could not be loaded from server. Please try again.")
 	}
 

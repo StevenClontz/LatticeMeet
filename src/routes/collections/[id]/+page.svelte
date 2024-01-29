@@ -8,6 +8,7 @@
 
 	export let data
 	
+	$: isAdmin = data.isAdmin
 	$: collection = data.collection
     $: subcollections = data.subcollections
     $: parent = data.parent
@@ -35,6 +36,12 @@
 {#if collection.website && collection.website !== ""}
 	<p>
 		<small>[<a style="color:#444444" href={collection.website}>Website</a>]</small>
+	</p>
+{/if}
+
+{#if isAdmin}
+	<p>
+		<small>[<a style="color:#dd0000" href={`/collections/${collection.id}/manage`}>Admin Dashboard]</small>
 	</p>
 {/if}
 

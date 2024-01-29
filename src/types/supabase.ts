@@ -9,6 +9,56 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      collection_admins: {
+        Row: {
+          collection_id: string
+          created_at: string
+          id: string
+          profile_id: string
+        }
+        Insert: {
+          collection_id: string
+          created_at?: string
+          id?: string
+          profile_id: string
+        }
+        Update: {
+          collection_id?: string
+          created_at?: string
+          id?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_admins_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_admins_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "full_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_admins_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_admins_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "verified_profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       collections: {
         Row: {
           created_at: string
@@ -376,7 +426,13 @@ export interface Database {
       }
     }
     Functions: {
-      [_ in never]: never
+      is_admin_of: {
+        Args: {
+          _profile_id: string
+          _collection_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       submission_status: "submitted" | "accepted" | "declined"

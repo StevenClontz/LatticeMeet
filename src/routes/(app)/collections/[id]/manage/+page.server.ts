@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit'
 
-export const load = async ({ locals: { supabase, getProfile }, params }) => {
+export const load = async ({ locals: { supabase }, params }) => {
 
 	const { data: collection, error: e } = await supabase
 		.from('collections')
@@ -25,7 +25,7 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 	
 	const { data: submissions, error: e3 } = await supabase
 		.from('submissions')
-		.select()
+		.select('*, profiles(first_name, last_name, affiliation)')
 		.eq(`collection_id`, params.id)
 	
 	if (submissions === null) {

@@ -41,7 +41,7 @@
 
 {#if isAdmin}
 	<p>
-		<small>[<a style="color:#dd0000" href={`/collections/${collection.id}/manage`}>Admin Dashboard]</small>
+		<small><a style="color:#dd0000" href={`/collections/${collection.id}/manage`}>[Admin Dashboard]</a></small>
 	</p>
 {/if}
 

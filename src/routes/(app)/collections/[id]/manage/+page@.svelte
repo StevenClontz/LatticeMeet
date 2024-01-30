@@ -19,6 +19,8 @@
 			<tr>
 				<th>Title</th>
 				<th>Abstract</th>
+				<th>Submitter Name</th>
+				<th>Affiliation</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +30,13 @@
 						{submission.title}
 					</td>
 					<td>
-						{submission.abstract.slice(0,200)}
+						{submission.abstract}
+					</td>
+					<td>
+						{submission.profiles?.first_name} {submission.profiles?.last_name}
+					</td>
+					<td>
+						{submission.profiles?.affiliation}
 					</td>
 				</tr>
 			{/each}

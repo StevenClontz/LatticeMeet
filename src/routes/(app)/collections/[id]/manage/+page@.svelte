@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { superForm } from 'sveltekit-superforms/client';
 	export let data
+	const { form, errors, enhance } = superForm(data.form, {
+		dataType: 'json'
+	});
 </script>
 
 <p>
@@ -21,10 +25,11 @@
 				<th>Abstract</th>
 				<th>Submitter Name</th>
 				<th>Affiliation</th>
+				<th>Profile Approval</th>
 			</tr>
 		</thead>
 		<tbody>
-			{#each data.submissions as submission}
+			{#each $form.submissions as submission, i}
 				<tr>
 					<td>
 						{submission.title}
@@ -37,6 +42,14 @@
 					</td>
 					<td>
 						{submission.profiles?.affiliation}
+					</td>
+					<td>
+						{#if submission.profiles?.profiles_status}
+							<input
+								type="checkbox"
+								bind:checked={submission.profiles.profiles_status.verified}
+								/>
+						{/if}
 					</td>
 				</tr>
 			{/each}

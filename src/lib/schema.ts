@@ -32,9 +32,14 @@ export const submissionWorksheetSchema = z.object({
         submissions_status: z.object({
             status: z.enum(["submitted","accepted","declined"])
         }).nullable(),
-        profiles: profileSchema.extend({
-            id: z.string(),
-            profiles_status: z.object({verified:z.boolean()}).nullable()
+        full_profiles: z.object({
+            id: z.string().nullable(),
+            first_name: z.string().min(1).trim().nullable(),
+            last_name: z.string().min(1).trim().nullable(),
+            website: z.string().url().nullable(),
+            affiliation: z.string().nullable(),
+            email: z.string().email().nullable(),
+            verified: z.boolean().nullable()
         }).nullable(),
     }).array()
 });

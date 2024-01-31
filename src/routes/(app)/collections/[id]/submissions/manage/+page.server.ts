@@ -31,7 +31,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.select(`
 			id, title, abstract, 
 			submissions_status(status),
-			profiles(id, first_name, last_name, affiliation, website, profiles_status(verified))
+			full_profiles(id, first_name, last_name, affiliation, website, verified, email)
 		`)
 		.eq(`collection_id`, params.id)
 			
@@ -64,7 +64,7 @@ export const actions = {
 		}
 
 		const profileStatusData = form.data.submissions.map(s=>{
-			return {id: s.profiles?.id || "", verified: s.profiles?.profiles_status?.verified}
+			return {id: s.full_profiles?.id || "", verified: s.full_profiles?.verified || false}
 		})
 		console.log(profileStatusData)
 

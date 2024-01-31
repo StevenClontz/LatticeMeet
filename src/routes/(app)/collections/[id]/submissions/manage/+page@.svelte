@@ -13,6 +13,10 @@
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
     import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';
+	import Gravatar from '$lib/Gravatar.svelte';
+	$: emails = $form.submissions
+		.filter(s=>s.submissions_status?.status=="accepted")
+		.map(s=>s.full_profiles?.email).join(", ")
 </script>
 
 <p>
@@ -24,11 +28,22 @@
 
 <h2 style="margin-top:0">
 	Manage Submissions for {data.collection.short_title}: {data.collection.title}
+</h2>
+
+<h3>Emails for accepted submissions</h3>
+{#if $tainted}
+<p>(Save your changes to view list.)</p>
+{:else}
+<textarea readonly style="width:100%">{emails}</textarea>
+{/if}
+
+
+<h3>
+	All submissions
 	{#if $tainted}
 		<DataTransferDownIcon/>
 	{/if}
-</h2>
-
+</h3>
 <form method="POST" use:enhance>
 	<div>
 		<table>
@@ -36,7 +51,7 @@
 				<tr>
 					<th>Title</th>
 					<th>Abstract</th>
-					<th>Submitter Name</th>
+					<th>Submitter</th>
 					<th>Affiliation</th>
 					<th>Profile Approval</th>
 					<th>Submission Status</th>
@@ -52,19 +67,21 @@
 							<Markdown md={submission.abstract || ""} {plugins}/>
 						</td>
 						<td>
-							{submission.profiles?.first_name} {submission.profiles?.last_name}
-							<small>[<a target="_blank" href={`/profiles/${submission.profiles?.id}`}>View Profile</a>]</small>
+							<Gravatar email={submission.full_profiles?.email} size={25}/>
+							{submission.full_profiles?.first_name} {submission.full_profiles?.last_name}
+							<a href={`mailto:${submission.full_profiles?.email}`}><code>{submission.full_profiles?.email}</code></a>
+							<small>[<a target="_blank" href={`/profiles/${submission.full_profiles?.id}`}>View Profile</a>]</small>
 						</td>
 						<td>
-							{submission.profiles?.affiliation}
+							{submission.full_profiles?.affiliation}
 						</td>
 						<td style="text-align:center">
-							{#if submission.profiles?.profiles_status}
+							{#if submission.full_profiles}
 								<input
 									type="checkbox"
-									bind:checked={submission.profiles.profiles_status.verified}
+									bind:checked={submission.full_profiles.verified}
 									/>
-								{#if $tainted?.submissions?.[i]?.profiles?.profiles_status?.verified}
+								{#if $tainted?.submissions?.[i]?.full_profiles?.verified}
 									<span title="Unsaved changes"><DataTransferDownIcon/></span>
 								{/if}
 							{/if}

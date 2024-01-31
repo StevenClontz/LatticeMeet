@@ -49,6 +49,7 @@
 						</td>
 						<td>
 							{submission.profiles?.first_name} {submission.profiles?.last_name}
+							<small>[<a target="_blank" href={`/profiles/${submission.profiles?.id}`}>View Profile</a>]</small>
 						</td>
 						<td>
 							{submission.profiles?.affiliation}

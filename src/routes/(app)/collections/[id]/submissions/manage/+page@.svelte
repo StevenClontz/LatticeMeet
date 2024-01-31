@@ -3,7 +3,7 @@
 	import { dev } from '$app/environment';
 	import { superForm } from 'sveltekit-superforms/client';
 	export let data
-	const { form, errors, enhance } = superForm(data.form, {
+	const { form, errors, enhance, tainted } = superForm(data.form, {
 		dataType: 'json'
 	});
 	import Markdown, { type Plugin } from 'svelte-exmarkdown';
@@ -12,6 +12,7 @@
 	const plugins: Plugin[] = [
 		{ remarkPlugin: [remarkMath], rehypePlugin: [rehypeKatex] }
 	];
+    import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';
 </script>
 
 <p>
@@ -54,12 +55,15 @@
 						<td>
 							{submission.profiles?.affiliation}
 						</td>
-						<td>
+						<td style="text-align:center">
 							{#if submission.profiles?.profiles_status}
 								<input
 									type="checkbox"
 									bind:checked={submission.profiles.profiles_status.verified}
 									/>
+								{#if $tainted?.submissions?.[i]?.profiles?.profiles_status?.verified}
+									<span title="Unsaved changes"><DataTransferDownIcon/></span>
+								{/if}
 							{/if}
 						</td>
 						<td>
@@ -75,6 +79,9 @@
 										Declined
 									</option>
 								</select>
+								{#if $tainted?.submissions?.[i]?.submissions_status?.status}
+									<span title="Unsaved changes"><DataTransferDownIcon/></span>
+								{/if}
 							{/if}
 						</td>
 					</tr>
@@ -82,7 +89,13 @@
 			</tbody>
 		</table>
 	</div>
-	<input name="submit" type="submit" value="Save changes"/>
+	<button name="submit" disabled={!$tainted}>
+		{#if $tainted}
+			Save changes <DataTransferDownIcon/>
+		{:else}
+			All changes saved
+		{/if}
+	</button>
 	{#if $errors.submissions}
 		There was an error in saving changes.
 	{/if}

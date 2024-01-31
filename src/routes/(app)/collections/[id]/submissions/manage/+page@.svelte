@@ -24,6 +24,9 @@
 
 <h2 style="margin-top:0">
 	Manage Submissions for {data.collection.short_title}: {data.collection.title}
+	{#if $tainted}
+		<DataTransferDownIcon/>
+	{/if}
 </h2>
 
 <form method="POST" use:enhance>

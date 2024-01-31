@@ -39,12 +39,6 @@
 	</p>
 {/if}
 
-{#if isAdmin}
-	<p>
-		<small><a style="color:#dd0000" href={`/collections/${collection.id}/manage`}>[Admin Dashboard]</a></small>
-	</p>
-{/if}
-
 <Markdown md={collection.description || ""} {plugins}/>
 
 {#if registration_options.length > 0}
@@ -88,6 +82,12 @@
 				<Markdown md={existingSubmission.abstract || ""} {plugins}/>
 			</div>
 		</article>
+	{/if}
+
+	{#if isAdmin}
+		<p>
+			<small><a style="color:#dd0000" href={`/collections/${collection.id}/submissions/manage`}>[Submissions Dashboard]</a></small>
+		</p>
 	{/if}
 	{#if acceptedSubmissions && acceptedSubmissions.length > 0}
 		<h3>Accepted Submissions</h3>

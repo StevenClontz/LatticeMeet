@@ -53,7 +53,7 @@ export const actions = {
 
 		const session = await getSession()
 		if (!session) {
-			throw redirect(303, '/login')
+			throw redirect(303, `/collections/${params.id}`)
 		}
 
 		const form = await superValidate(request, submissionWorksheetSchema);
@@ -87,6 +87,6 @@ export const actions = {
 			return fail(500, { form });
 		}
 
-		throw redirect(303, `/collections/${params.id}/manage`)
+		throw redirect(303, `/collections/${params.id}/submissions/manage`)
 	}
 }

@@ -22,7 +22,7 @@
 </p>
 
 <h2 style="margin-top:0">
-	Manage {data.collection.short_title}: {data.collection.title}
+	Manage Submissions for {data.collection.short_title}: {data.collection.title}
 </h2>
 
 <form method="POST" use:enhance>

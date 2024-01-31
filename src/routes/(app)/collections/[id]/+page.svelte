@@ -95,7 +95,7 @@
 			<article>
 				<h3><Markdown md={submission.title || ""} {plugins}/></h3>
 				<p>
-					Lead author:
+					Submitting author:
 					<a href={`/profiles/${submission.profile_id}`}>{submission.first_name} {submission.last_name}</a>,
 					{submission.affiliation}
 				</p>

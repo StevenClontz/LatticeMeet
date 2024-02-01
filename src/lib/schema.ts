@@ -44,22 +44,6 @@ export const submissionWorksheetSchema = z.object({
     }).array()
 });
 
-// const submissions: {
-//     abstract: string;
-//     collection_id: string;
-//     created_at: string;
-//     id: string;
-//     profile_id: string;
-//     title: string;
-//     submissions_status: {
-//         id: string;
-//         status: "submitted" | "accepted" | "declined";
-//     } | null;
-//     profiles: {
-//         ...;
-//     } | null;
-// }[]
-
 export const registrationSchema = z.object({
     registration_option_id: z.string().trim(),
     first_name: z.string().min(1).trim(),
@@ -71,3 +55,23 @@ export const registrationSchema = z.object({
     first_name: true,
     last_name: true,
 });
+
+export const registrationWorksheetSchema = z.object({
+    registrations: z.object({
+        id: z.string(),
+        registration_options: z.object({
+            id: z.string().nullable(),
+            title: z.string().nullable(),
+        }).nullable(),
+        full_profiles: z.object({
+            id: z.string().nullable(),
+            first_name: z.string().min(1).trim().nullable(),
+            last_name: z.string().min(1).trim().nullable(),
+            website: z.string().url().nullable(),
+            affiliation: z.string().nullable(),
+            email: z.string().email().nullable(),
+            verified: z.boolean().nullable()
+        }).nullable(),
+    }).array()
+});
+

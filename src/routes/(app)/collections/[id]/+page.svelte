@@ -55,6 +55,12 @@
 			</a>
 		</p>
 	{/if}
+
+	{#if isAdmin}
+		<p>
+			<small><a style="color:#dd0000" href={`/collections/${collection.id}/registrations/manage`}>[Registrations Dashboard]</a></small>
+		</p>
+	{/if}
 {/if}
 
 {#if subcollections.length > 0}

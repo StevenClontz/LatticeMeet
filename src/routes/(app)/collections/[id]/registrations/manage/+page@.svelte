@@ -8,6 +8,8 @@
 	});
     import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';
 	import Gravatar from '$lib/Gravatar.svelte';
+	$: emails = $form.registrations
+		.map(s=>s.full_profiles?.email).join(", ")
 </script>
 
 <p>
@@ -20,6 +22,9 @@
 <h2 style="margin-top:0">
 	Manage Registrations for {data.collection.short_title}: {data.collection.title}
 </h2>
+
+<h3>Emails for registrations</h3>
+<textarea readonly style="width:100%">{emails}</textarea>
 
 <h3>
 	All registrations ({$form.registrations.length})
@@ -80,8 +85,7 @@
 			</tbody>
 		</table>
 	</div>
-	<button name="submit" disabled>
-		 <!-- disabled={!$tainted}> -->
+	<button name="submit" disabled={!$tainted}>
 		{#if $tainted}
 			Save changes <DataTransferDownIcon/>
 		{:else}

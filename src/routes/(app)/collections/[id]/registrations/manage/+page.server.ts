@@ -59,45 +59,49 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	return { form, collection, registration_options }
 }
 
-// export const actions = {
-// 	default: async ({ params, request, locals: { supabase, getSession } }) => {
+export const actions = {
+	default: async ({ params, request, locals: { supabase, getSession } }) => {
 
-// 		const session = await getSession()
-// 		if (!session) {
-// 			throw redirect(303, `/collections/${params.id}`)
-// 		}
+		const session = await getSession()
+		if (!session) {
+			throw redirect(303, `/collections/${params.id}`)
+		}
 
-// 		const form = await superValidate(request, submissionWorksheetSchema);
-// 		console.log('POST', form);
+		const form = await superValidate(request, registrationWorksheetSchema);
+		console.log('POST', form);
 		
-// 		if (!form.valid) {
-// 			return fail(400, { form });
-// 		}
+		if (!form.valid) {
+			return fail(400, { form });
+		}
 
-// 		const profileStatusData = form.data.submissions.map(s=>{
-// 			return {id: s.full_profiles?.id || "", verified: s.full_profiles?.verified || false}
-// 		})
-// 		console.log(profileStatusData)
+		const profileStatusData = form.data.registrations.map(r=>{
+			return {id: r.full_profiles?.id || "", verified: r.full_profiles?.verified || false}
+		})
+		console.log(profileStatusData)
 
-// 		const { error: profileError } = await supabase
-// 			.from('profiles_status')
-// 			.upsert(profileStatusData)
+		const { error: profileError } = await supabase
+			.from('profiles_status')
+			.upsert(profileStatusData)
 
-// 		const submissionStatusData = form.data.submissions.map(s=>{
-// 			return {id: s.id || "", status: s.submissions_status?.status || "submitted"}
-// 		})
-// 		console.log(submissionStatusData)
+		const registrationData = form.data.registrations.map(s=>{
+			return {
+				id: s.id || "", 
+				profile_id: s.full_profiles?.id || "", 
+				registration_option_id: s.registration_options?.id || ""
+			}
+		})
+		console.log(registrationData)
 
-// 		const { error: submissionError } = await supabase
-// 			.from('submissions_status')
-// 			.upsert(submissionStatusData)
+		const { error: registrationError } = await supabase
+			.from('registrations')
+			.upsert(registrationData)
 
-// 		if (profileError || submissionError) {
-// 			console.log(profileError)
-// 			console.log(submissionError)
-// 			return fail(500, { form });
-// 		}
+		if (profileError || registrationError) {
+			console.log(profileError)
+			console.log(registrationError)
+			return fail(500, { form });
+		}
 
-// 		throw redirect(303, `/collections/${params.id}/submissions/manage`)
-// 	}
-// }
+		throw redirect(303, `/collections/${params.id}/registrations/manage`)
+	}
+}

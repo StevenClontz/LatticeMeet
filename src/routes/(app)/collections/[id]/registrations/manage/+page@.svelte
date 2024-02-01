@@ -101,3 +101,7 @@
 {#if dev}
 	<SuperDebug data={$form} />
 {/if}
+
+<style>
+	td {border-bottom-width:1px}
+</style>

@@ -59,7 +59,7 @@
 			</thead>
 			<tbody>
 				{#each $form.submissions as submission, i}
-					<tr>
+					<tr class={submission.submissions_status?.status}>
 						<td style="font-size:1.1em">
 							<Markdown md={submission.title || ""} {plugins}/>
 						</td>
@@ -129,5 +129,14 @@
 <style>
 	table tr {
 		border-bottom: 1px solid black;
+	}
+	tr.submitted {
+		background-color: #eeffee;
+	}
+	tr.accepted {
+		background-color: inherit;
+	}
+	tr.declined {
+		background-color: #888888;
 	}
 </style>

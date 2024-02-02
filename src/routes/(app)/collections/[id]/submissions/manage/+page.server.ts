@@ -29,11 +29,12 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	const { data: submissions, error: subError } = await supabase
 		.from('submissions')
 		.select(`
-			id, title, abstract, 
+			id, title, abstract, created_at,
 			submissions_status(status),
 			full_profiles(id, first_name, last_name, affiliation, website, verified, email)
 		`)
 		.eq(`collection_id`, params.id)
+		.order('created_at', { ascending: false })
 			
 	if (submissions === null) {
 		console.log(subError)

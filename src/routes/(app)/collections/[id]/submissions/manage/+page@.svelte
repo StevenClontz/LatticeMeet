@@ -55,6 +55,7 @@
 					<th>Affiliation</th>
 					<th>Profile Approval</th>
 					<th>Submission Status</th>
+					<th>Submitted On</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -103,6 +104,10 @@
 									<span title="Unsaved changes"><DataTransferDownIcon/></span>
 								{/if}
 							{/if}
+						</td>
+						<td style="font-size:0.8em">
+							{new Date(submission.created_at).toLocaleDateString()}
+							{new Date(submission.created_at).toLocaleTimeString()}
 						</td>
 					</tr>
 				{/each}

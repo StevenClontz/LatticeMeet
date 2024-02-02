@@ -38,14 +38,13 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	const { data: registrations, error: regError } = await supabase
 		.from('registrations')
 		.select(`
-			id,
+			id, created_at,
 			registration_options(id, title),
 			full_profiles(id, first_name, last_name, affiliation, website, verified, email)
 		`)
 		.in(`registration_option_id`, registration_options.map(ro=>ro.id))
-		// .order('first_name', { referencedTable: 'full_profiles', ascending: true})
-		// .order('last_name', { referencedTable: 'full_profiles', ascending: true})
-			
+		.order('created_at', {ascending: false})
+	
 	if (registrations === null) {
 		console.log(regError)
 		throw error(500, "Registrations could not be loaded from server. Please try again.")

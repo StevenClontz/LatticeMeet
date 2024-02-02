@@ -29,6 +29,7 @@ export const submissionWorksheetSchema = z.object({
         id: z.string(),
         title: z.string(),
         abstract: z.string(),
+        created_at: z.string(),
         submissions_status: z.object({
             status: z.enum(["submitted","accepted","declined"])
         }).nullable(),
@@ -59,6 +60,7 @@ export const registrationSchema = z.object({
 export const registrationWorksheetSchema = z.object({
     registrations: z.object({
         id: z.string(),
+        created_at: z.string(),
         registration_options: z.object({
             id: z.string().nullable(),
             title: z.string().nullable(),

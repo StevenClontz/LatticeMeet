@@ -32,6 +32,8 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.from('accepted_submissions')
 		.select(`*`)
 		.eq(`collection_id`,params.id)
+		.order('last_name', { ascending: true })
+		.order('first_name', { ascending: true })
 	
 	if (acceptedSubmissions === null) {
 		throw error(500, "Collection could not be loaded from server. Please try again.")

@@ -103,5 +103,7 @@
 {/if}
 
 <style>
-	td {border-bottom-width:1px}
+	table tr {
+		border-bottom: 1px solid black;
+	}
 </style>

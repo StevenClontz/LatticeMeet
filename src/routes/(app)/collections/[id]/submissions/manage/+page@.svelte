@@ -60,7 +60,7 @@
 			<tbody>
 				{#each $form.submissions as submission, i}
 					<tr>
-						<td>
+						<td style="font-size:1.1em">
 							<Markdown md={submission.title || ""} {plugins}/>
 						</td>
 						<td>
@@ -127,5 +127,7 @@
 {/if}
 
 <style>
-	td {border-bottom-width:1px}
+	table tr {
+		border-bottom: 1px solid black;
+	}
 </style>

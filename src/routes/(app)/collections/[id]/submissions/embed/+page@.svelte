@@ -16,7 +16,7 @@
 
 <h3>Submissions accepted for {collection.short_title}: {collection.title}</h3>
 
-<p style="font-style:italic;margin-top:1em">
+<p style="font-style:italic">
 	Powered by <a href="https://scholarlattice.pi-base.org">{appTitle}</a>
 </p>
 

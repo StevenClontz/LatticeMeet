@@ -15,6 +15,11 @@
 </script>
 
 <h3>Submissions accepted for {collection.short_title}: {collection.title}</h3>
+
+<p style="font-style:italic;margin-top:1em">
+	Powered by <a href="https://scholarlattice.pi-base.org">{appTitle}</a>
+</p>
+
 {#if acceptedSubmissions && acceptedSubmissions.length > 0}
 	{#each acceptedSubmissions as submission}
 		<article>
@@ -33,7 +38,3 @@
 {:else}
 	<p>No submissions have been accepted yet for this collection.</p>
 {/if}
-
-<p style="font-style:italic;text-align:center;margin-top:1em">
-	Powered by <a href="https://scholarlattice.pi-base.org">{appTitle}</a>
-</p>

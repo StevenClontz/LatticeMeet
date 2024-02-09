@@ -7,7 +7,7 @@
 		dataType: 'json',
 		delayMs: 1000,
 		onError({ result }) {
-			alert(result.error.message);
+			alert(result.error.message || "There was a problem submitting your form.");
 		}
 	});
     import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';

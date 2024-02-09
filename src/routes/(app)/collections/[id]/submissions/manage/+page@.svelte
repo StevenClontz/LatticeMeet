@@ -7,7 +7,7 @@
 		dataType: 'json',
 		delayMs: 1000,
 		onError({ result }) {
-			alert(result.error.message);
+			alert(result.error.message || "There was a problem submitting your form.");
 		}
 	});
 	import Markdown, { type Plugin } from 'svelte-exmarkdown';

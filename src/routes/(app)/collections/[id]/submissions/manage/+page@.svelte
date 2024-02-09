@@ -3,8 +3,9 @@
 	import { dev } from '$app/environment';
 	import { superForm } from 'sveltekit-superforms/client';
 	export let data
-	const { form, errors, enhance, tainted } = superForm(data.form, {
-		dataType: 'json'
+	const { form, errors, enhance, tainted, submitting, delayed } = superForm(data.form, {
+		dataType: 'json',
+		delayMs: 1000,
 	});
 	import Markdown, { type Plugin } from 'svelte-exmarkdown';
 	import rehypeKatex from 'rehype-katex';
@@ -114,8 +115,12 @@
 			</tbody>
 		</table>
 	</div>
-	<button name="submit" disabled={!$tainted}>
-		{#if $tainted}
+	<button name="submit" disabled={!$tainted || $submitting}>
+		{#if $delayed}
+			Submitting... (sorry for the wait)
+		{:else if $submitting}
+			Submitting...
+		{:else if $tainted}
 			Save changes <DataTransferDownIcon/>
 		{:else}
 			All changes saved

@@ -5,7 +5,7 @@
 	export let data
 	const { form, errors, enhance, tainted, submitting, delayed } = superForm(data.form, {
 		dataType: 'json',
-		delayMs: 1000,
+		delayMs: 4000,
 		onError({ result }) {
 			alert(result.error.message || "There was a problem submitting your form.");
 		}

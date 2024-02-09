@@ -61,6 +61,8 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 export const actions = {
 	default: async ({ params, request, locals: { supabase, getSession } }) => {
 
+
+		redirect(303, `/collections/${params.id}/registrations/manage`);
 		const session = await getSession()
 		if (!session) {
 			redirect(303, `/collections/${params.id}`);

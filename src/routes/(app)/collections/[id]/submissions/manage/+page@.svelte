@@ -6,6 +6,9 @@
 	const { form, errors, enhance, tainted, submitting, delayed } = superForm(data.form, {
 		dataType: 'json',
 		delayMs: 1000,
+		onError({ result }) {
+			alert(result.error.message);
+		}
 	});
 	import Markdown, { type Plugin } from 'svelte-exmarkdown';
 	import rehypeKatex from 'rehype-katex';

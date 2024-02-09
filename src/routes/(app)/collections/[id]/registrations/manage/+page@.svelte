@@ -6,6 +6,9 @@
 	const { form, errors, enhance, tainted, submitting, delayed } = superForm(data.form, {
 		dataType: 'json',
 		delayMs: 1000,
+		onError({ result }) {
+			alert(result.error.message);
+		}
 	});
     import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';
 	import Gravatar from '$lib/Gravatar.svelte';

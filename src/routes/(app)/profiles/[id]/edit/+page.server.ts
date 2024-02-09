@@ -6,7 +6,7 @@ export const load = async ({ locals: { supabase, getSession }, params  }) => {
 	const session = await getSession()
 
 	if (!session) {
-		throw redirect(303, '/login')
+		redirect(303, '/login');
 	}
 
 	const { data: profile } = await supabase
@@ -17,7 +17,7 @@ export const load = async ({ locals: { supabase, getSession }, params  }) => {
 
 	if (profile === null) {
 		await supabase.auth.signOut()
-		throw error(500, "Profile could not be loaded from server. Please try again.")
+		error(500, "Profile could not be loaded from server. Please try again.");
 	}
 	
 	const form = await superValidate(profile, profileSchema);
@@ -30,7 +30,7 @@ export const actions = {
 
 		const session = await getSession()
 		if (!session) {
-			throw redirect(303, '/login')
+			redirect(303, '/login');
 		}
 
 		const form = await superValidate(request, profileSchema);
@@ -57,7 +57,7 @@ export const actions = {
 			return fail(500, { form });
 		}
 
-		throw redirect(303, `/profiles/${profileData.id}`)
+		redirect(303, `/profiles/${profileData.id}`);
 	},
 
 }

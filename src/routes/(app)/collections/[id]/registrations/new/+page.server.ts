@@ -6,7 +6,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	const session = await getSession()
 
 	if (!session) {
-		throw redirect(303, `/login?next=/collections/${params.id}/registrations/new`)
+		redirect(303, `/login?next=/collections/${params.id}/registrations/new`);
 	}
 
 	const { data: collection } = await supabase
@@ -16,14 +16,14 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.single()
 	
 	if (collection === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const profile = await getProfile()
 			
 	if (profile === null) {
 		await supabase.auth.signOut()
-		throw error(500, "Profile could not be loaded from server. Please try again.")
+		error(500, "Profile could not be loaded from server. Please try again.");
 	}
 
 	const form = await superValidate(
@@ -37,7 +37,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.eq(`collection_id`, params.id)
 	
 	if (registration_options === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 	
 	const { data: existingRegistration } = profile ? await supabase
@@ -55,7 +55,7 @@ export const actions = {
 
 		const session = await getSession()
 		if (!session) {
-			throw redirect(303, '/login')
+			redirect(303, '/login');
 		}
 
 		const form = await superValidate(request, registrationSchema);
@@ -98,6 +98,6 @@ export const actions = {
 			return fail(500, { form });
 		}
 
-		throw redirect(303, `/collections/${params.id}`)
+		redirect(303, `/collections/${params.id}`);
 	}
 }

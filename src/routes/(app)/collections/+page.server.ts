@@ -8,7 +8,7 @@ export const load = async ({ locals: { supabase } }) => {
 		.is('parent_id', null)
 	
 	if (collections === null) {
-		throw error(500, "Collections could not be loaded from server. Please try again.")
+		error(500, "Collections could not be loaded from server. Please try again.");
 	}
 
 	return { collections }

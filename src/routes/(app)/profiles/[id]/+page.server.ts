@@ -9,7 +9,7 @@ export const load = async ({ locals: { supabase, getProfile  }, params }) => {
 		.single()
 	
 	if (profile === null) {
-		throw error(500, "Profile could not be loaded from server. Please try again.")
+		error(500, "Profile could not be loaded from server. Please try again.");
 	}
 
 	const { data: submissions } = await supabase

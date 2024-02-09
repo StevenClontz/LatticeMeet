@@ -9,7 +9,7 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.single()
 	
 	if (collection === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const { data: subcollections } = await supabase
@@ -19,7 +19,7 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.eq(`parent_id`, params.id)
 	
 	if (subcollections === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 	
 	const { data: parent } = collection.parent_id ? await supabase
@@ -36,7 +36,7 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.order('first_name', { ascending: true })
 	
 	if (acceptedSubmissions === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 	
 	const { data: registration_options } = await supabase
@@ -45,7 +45,7 @@ export const load = async ({ locals: { supabase, getProfile }, params }) => {
 		.eq(`collection_id`, params.id)
 	
 	if (registration_options === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const profile = await getProfile()

@@ -8,7 +8,7 @@ export const load = async ({ locals: { supabase } }) => {
 		.order(`last_name`)
 	
 	if (profiles === null) {
-		throw error(500, "Profiles could not be loaded from server. Please try again.")
+		error(500, "Profiles could not be loaded from server. Please try again.");
 	}
 
 	return { profiles }

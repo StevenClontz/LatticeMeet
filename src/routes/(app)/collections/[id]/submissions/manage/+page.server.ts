@@ -6,7 +6,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	const session = await getSession()
 
 	if (!session) {
-		throw redirect(303, `/collections/${params.id}`)
+		redirect(303, `/collections/${params.id}`);
 	}
 
 	const { data: collection } = await supabase
@@ -16,14 +16,14 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.single()
 	
 	if (collection === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const profile = await getProfile()
 			
 	if (profile === null) {
 		await supabase.auth.signOut()
-		throw error(500, "Profile could not be loaded from server. Please try again.")
+		error(500, "Profile could not be loaded from server. Please try again.");
 	}
 
 	const { data: submissions, error: subError } = await supabase
@@ -38,7 +38,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 			
 	if (submissions === null) {
 		console.log(subError)
-		throw error(500, "Submissions could not be loaded from server. Please try again.")
+		error(500, "Submissions could not be loaded from server. Please try again.");
 	}
 
 	const form = await superValidate(
@@ -54,7 +54,7 @@ export const actions = {
 
 		const session = await getSession()
 		if (!session) {
-			throw redirect(303, `/collections/${params.id}`)
+			redirect(303, `/collections/${params.id}`);
 		}
 
 		const form = await superValidate(request, submissionWorksheetSchema);
@@ -88,6 +88,6 @@ export const actions = {
 			return fail(500, { form });
 		}
 
-		throw redirect(303, `/collections/${params.id}/submissions/manage`)
+		redirect(303, `/collections/${params.id}/submissions/manage`);
 	}
 }

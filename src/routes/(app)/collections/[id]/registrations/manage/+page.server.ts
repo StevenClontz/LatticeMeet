@@ -6,7 +6,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	const session = await getSession()
 
 	if (!session) {
-		throw redirect(303, `/collections/${params.id}`)
+		redirect(303, `/collections/${params.id}`);
 	}
 
 	const { data: collection } = await supabase
@@ -16,14 +16,14 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.single()
 	
 	if (collection === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const profile = await getProfile()
 			
 	if (profile === null) {
 		await supabase.auth.signOut()
-		throw error(500, "Profile could not be loaded from server. Please try again.")
+		error(500, "Profile could not be loaded from server. Please try again.");
 	}
 	
 	const { data: registration_options } = await supabase
@@ -32,7 +32,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		.eq(`collection_id`, params.id)
 	
 	if (registration_options === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const { data: registrations, error: regError } = await supabase
@@ -47,7 +47,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	
 	if (registrations === null) {
 		console.log(regError)
-		throw error(500, "Registrations could not be loaded from server. Please try again.")
+		error(500, "Registrations could not be loaded from server. Please try again.");
 	}
 
 	const form = await superValidate(
@@ -63,7 +63,7 @@ export const actions = {
 
 		const session = await getSession()
 		if (!session) {
-			throw redirect(303, `/collections/${params.id}`)
+			redirect(303, `/collections/${params.id}`);
 		}
 
 		const form = await superValidate(request, registrationWorksheetSchema);
@@ -101,6 +101,6 @@ export const actions = {
 			return fail(500, { form });
 		}
 
-		throw redirect(303, `/collections/${params.id}/registrations/manage`)
+		redirect(303, `/collections/${params.id}/registrations/manage`);
 	}
 }

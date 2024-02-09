@@ -4,7 +4,7 @@ export const load = async ({ locals: { getSession } }) => {
 	const session = await getSession()
 
 	if (session) {
-		throw redirect(303, '/')
+		redirect(303, '/');
 	}
 
 	return
@@ -15,7 +15,7 @@ export const actions = {
 		const session = await getSession()
 	
 		if (session) {
-			throw redirect(303, '/')
+			redirect(303, '/');
 		}
 
 		const formData =  await request.formData()
@@ -35,7 +35,7 @@ export const actions = {
 			return fail(500, { email });
 		}
 
-		throw redirect(303, `/login/confirm?email=${email}&next=${next}`)
+		redirect(303, `/login/confirm?email=${email}&next=${next}`);
 	},
 
 }

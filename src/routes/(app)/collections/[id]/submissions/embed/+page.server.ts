@@ -9,7 +9,7 @@ export const load = async ({ locals: { supabase }, params }) => {
 		.single()
 	
 	if (collection === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
 	const { data: acceptedSubmissions } = await supabase
@@ -20,7 +20,7 @@ export const load = async ({ locals: { supabase }, params }) => {
 		.order('first_name', { ascending: true })
 	
 	if (acceptedSubmissions === null) {
-		throw error(500, "Collection could not be loaded from server. Please try again.")
+		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 	return { 
 		collection, 

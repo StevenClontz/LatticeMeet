@@ -58,7 +58,6 @@ export const actions = {
 		}
 
 		const form = await superValidate(request, submissionWorksheetSchema);
-		console.log('POST', form);
 		
 		if (!form.valid) {
 			return fail(400, { form });
@@ -67,7 +66,6 @@ export const actions = {
 		const profileStatusData = form.data.submissions.map(s=>{
 			return {id: s.full_profiles?.id || "", verified: s.full_profiles?.verified || false}
 		})
-		console.log(profileStatusData)
 
 		const { error: profileError } = await supabase
 			.from('profiles_status')
@@ -76,7 +74,6 @@ export const actions = {
 		const submissionStatusData = form.data.submissions.map(s=>{
 			return {id: s.id || "", status: s.submissions_status?.status || "submitted"}
 		})
-		console.log(submissionStatusData)
 
 		const { error: submissionError } = await supabase
 			.from('submissions_status')

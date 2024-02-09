@@ -67,7 +67,6 @@ export const actions = {
 		}
 
 		const form = await superValidate(request, registrationWorksheetSchema);
-		console.log('POST', form);
 		
 		if (!form.valid) {
 			return fail(400, { form });
@@ -76,7 +75,6 @@ export const actions = {
 		const profileStatusData = form.data.registrations.map(r=>{
 			return {id: r.full_profiles?.id || "", verified: r.full_profiles?.verified || false}
 		})
-		console.log(profileStatusData)
 
 		const { error: profileError } = await supabase
 			.from('profiles_status')
@@ -89,7 +87,6 @@ export const actions = {
 				registration_option_id: s.registration_options?.id || ""
 			}
 		})
-		console.log(registrationData)
 
 		const { error: registrationError } = await supabase
 			.from('registrations')

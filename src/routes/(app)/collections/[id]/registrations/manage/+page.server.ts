@@ -76,9 +76,9 @@ export const actions = {
 			return {id: r.full_profiles?.id || "", verified: r.full_profiles?.verified || false}
 		})
 
-		const { error: profileError } = await supabase
-			.from('profiles_status')
-			.upsert(profileStatusData)
+		// const { error: profileError } = await supabase
+		// 	.from('profiles_status')
+		// 	.upsert(profileStatusData)
 
 		const registrationData = form.data.registrations.map(s=>{
 			return {
@@ -88,15 +88,15 @@ export const actions = {
 			}
 		})
 
-		const { error: registrationError } = await supabase
-			.from('registrations')
-			.upsert(registrationData)
+		// const { error: registrationError } = await supabase
+		// 	.from('registrations')
+		// 	.upsert(registrationData)
 
-		if (profileError || registrationError) {
-			console.log(profileError)
-			console.log(registrationError)
-			return fail(500, { form });
-		}
+		// if (profileError || registrationError) {
+		// 	console.log(profileError)
+		// 	console.log(registrationError)
+		// 	return fail(500, { form });
+		// }
 
 		redirect(303, `/collections/${params.id}/registrations/manage`);
 	}

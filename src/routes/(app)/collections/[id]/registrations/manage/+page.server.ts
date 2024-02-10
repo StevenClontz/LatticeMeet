@@ -66,9 +66,11 @@ export const actions = {
 			redirect(303, `/collections/${params.id}`);
 		}
 
-		const form = await superValidate(request, registrationWorksheetSchema);
-
+		const formData = await request.formData();
+		console.log(formData);
 		redirect(303, `/collections/${params.id}/registrations/manage`);
+		// Remove some data
+		const form = await superValidate(formData, registrationWorksheetSchema);
 		
 		if (!form.valid) {
 			return fail(400, { form });

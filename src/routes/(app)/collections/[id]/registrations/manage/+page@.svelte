@@ -4,7 +4,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	export let data
 	const { form, errors, enhance, tainted, submitting, delayed } = superForm(data.form, {
-		jsonChunkSize: 100000,
+		jsonChunkSize: 10000,
 		dataType: 'json',
 		delayMs: 4000,
 		onError({ result }) {

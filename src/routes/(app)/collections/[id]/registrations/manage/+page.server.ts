@@ -39,7 +39,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		Number(url.searchParams.get("page")) :
 		1
 
-	const PAGESIZE = 20
+	const PAGESIZE = 100
 	const { data: registrations, error: regError } = await supabase
 		.from('registrations')
 		.select(`

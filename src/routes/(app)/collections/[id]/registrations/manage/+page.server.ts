@@ -39,6 +39,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		Number(url.searchParams.get("page")) :
 		1
 
+	const PAGESIZE = 20
 	const { data: registrations, error: regError } = await supabase
 		.from('registrations')
 		.select(`
@@ -48,7 +49,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.in(`registration_option_id`, registration_options.map(ro=>ro.id))
 		.order('created_at', {ascending: false})
-		.range((page-1)*5,(page-1)*5+4)
+		.range((page-1)*PAGESIZE,(page)*PAGESIZE-1)
 	
 	if (registrations === null) {
 		console.log(regError)

@@ -30,6 +30,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		Number(url.searchParams.get("page")) :
 		1
 
+	const PAGESIZE = 20
 	const { data: submissions, error: subError } = await supabase
 		.from('submissions')
 		.select(`
@@ -39,7 +40,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.eq(`collection_id`, params.id)
 		.order('created_at', { ascending: false })
-		.range((page-1)*5,(page-1)*5+4)
+		.range((page-1)*PAGESIZE,(page)*PAGESIZE-1)
 			
 	if (submissions === null) {
 		console.log(subError)

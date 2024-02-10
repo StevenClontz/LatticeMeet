@@ -2,7 +2,7 @@ import { fail, redirect, error } from '@sveltejs/kit'
 import { superValidate } from 'sveltekit-superforms/server';
 import { submissionWorksheetSchema } from '$lib/schema.js';
 
-export const load = async ({ locals: { supabase, getSession, getProfile }, params }) => {
+export const load = async ({ locals: { supabase, getSession, getProfile }, params, url }) => {
 	const session = await getSession()
 
 	if (!session) {
@@ -26,6 +26,10 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		error(500, "Profile could not be loaded from server. Please try again.");
 	}
 
+	const page = url.searchParams.get("page") ?
+		Number(url.searchParams.get("page")) :
+		1
+
 	const { data: submissions, error: subError } = await supabase
 		.from('submissions')
 		.select(`
@@ -35,6 +39,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.eq(`collection_id`, params.id)
 		.order('created_at', { ascending: false })
+		.range((page-1)*5,(page-1)*5+4)
 			
 	if (submissions === null) {
 		console.log(subError)
@@ -46,7 +51,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		submissionWorksheetSchema
 	);
 
-	return { form, collection }
+	return { form, collection, page }
 }
 
 export const actions = {

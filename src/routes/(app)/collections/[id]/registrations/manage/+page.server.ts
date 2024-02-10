@@ -2,7 +2,7 @@ import { fail, redirect, error } from '@sveltejs/kit'
 import { superValidate } from 'sveltekit-superforms/server';
 import { registrationWorksheetSchema } from '$lib/schema.js';
 
-export const load = async ({ locals: { supabase, getSession, getProfile }, params }) => {
+export const load = async ({ locals: { supabase, getSession, getProfile }, params, url }) => {
 	const session = await getSession()
 
 	if (!session) {
@@ -35,6 +35,10 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		error(500, "Collection could not be loaded from server. Please try again.");
 	}
 
+	const page = url.searchParams.get("page") ?
+		Number(url.searchParams.get("page")) :
+		1
+
 	const { data: registrations, error: regError } = await supabase
 		.from('registrations')
 		.select(`
@@ -44,6 +48,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.in(`registration_option_id`, registration_options.map(ro=>ro.id))
 		.order('created_at', {ascending: false})
+		.range((page-1)*5,(page-1)*5+4)
 	
 	if (registrations === null) {
 		console.log(regError)
@@ -55,7 +60,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		registrationWorksheetSchema
 	);
 
-	return { form, collection, registration_options }
+	return { form, collection, registration_options, page }
 }
 
 export const actions = {

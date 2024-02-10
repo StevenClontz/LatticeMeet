@@ -31,11 +31,17 @@
 <textarea readonly style="width:100%">{emails}</textarea>
 
 <h3>
-	All registrations ({$form.registrations.length})
+	Registrations (page {data.page})
 	{#if $tainted}
 		<DataTransferDownIcon/>
 	{/if}
 </h3>
+<p>
+	{#if data.page > 1}
+		<a href={`?page=${data.page-1}`}>Previous page</a>
+	{/if}
+	<a href={`?page=${data.page+1}`}>Next page</a>
+</p>
 <form method="POST" use:enhance>
 	<div>
 		<table>

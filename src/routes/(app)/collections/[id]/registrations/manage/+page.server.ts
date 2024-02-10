@@ -66,13 +66,13 @@ export const actions = {
 			redirect(303, `/collections/${params.id}`);
 		}
 
+		redirect(303, `/collections/${params.id}/registrations/manage`);
+
 		const form = await superValidate(request, registrationWorksheetSchema);
 		
 		if (!form.valid) {
 			return fail(400, { form });
 		}
-
-		redirect(303, `/collections/${params.id}/registrations/manage`);
 
 		const profileStatusData = form.data.registrations.map(r=>{
 			return {id: r.full_profiles?.id || "", verified: r.full_profiles?.verified || false}

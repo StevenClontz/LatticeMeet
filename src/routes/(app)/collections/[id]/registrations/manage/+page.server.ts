@@ -66,9 +66,9 @@ export const actions = {
 			redirect(303, `/collections/${params.id}`);
 		}
 
-		redirect(303, `/collections/${params.id}/registrations/manage`);
-
 		const form = await superValidate(request, registrationWorksheetSchema);
+
+		redirect(303, `/collections/${params.id}/registrations/manage`);
 		
 		if (!form.valid) {
 			return fail(400, { form });

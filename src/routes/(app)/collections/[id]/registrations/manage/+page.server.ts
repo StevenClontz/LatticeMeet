@@ -44,6 +44,7 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.in(`registration_option_id`, registration_options.map(ro=>ro.id))
 		.order('created_at', {ascending: false})
+		.limit(3)
 	
 	if (registrations === null) {
 		console.log(regError)
@@ -66,6 +67,7 @@ export const actions = {
 			redirect(303, `/collections/${params.id}`);
 		}
 
+		console.log(request)
 		const formData = await request.formData();
 		console.log(formData);
 		redirect(303, `/collections/${params.id}/registrations/manage`);

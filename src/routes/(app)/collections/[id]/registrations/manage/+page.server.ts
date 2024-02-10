@@ -44,7 +44,6 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.in(`registration_option_id`, registration_options.map(ro=>ro.id))
 		.order('created_at', {ascending: false})
-		.limit(26)
 	
 	if (registrations === null) {
 		console.log(regError)

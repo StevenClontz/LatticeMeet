@@ -18,9 +18,12 @@
 	];
     import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';
 	import Gravatar from '$lib/Gravatar.svelte';
-	$: emails = $form.submissions
+	$: emails = data.submissions
 		.filter(s=>s.submissions_status?.status=="accepted")
 		.map(s=>s.full_profiles?.email).join(", ")
+	$: emailsAll = data.submissions
+		.map(s=>s.full_profiles?.email).join(", ")
+	$: pages = Math.floor((data.submissions.length-1)/5)+1
 </script>
 
 <p>
@@ -34,7 +37,15 @@
 	Manage Submissions for {data.collection.short_title}: {data.collection.title}
 </h2>
 
-<h3>Emails for accepted submissions</h3>
+<h3>Emails for all {data.submissions.length} submissions</h3>
+<textarea readonly style="width:100%">{emailsAll}</textarea>
+
+<h3>
+	Emails for 
+	{data.submissions
+		.filter(s=>s.submissions_status?.status=="accepted").length}
+	accepted submissions
+</h3>
 {#if $tainted}
 <p>(Save your changes to view list.)</p>
 {:else}
@@ -44,7 +55,7 @@
 
 
 <h3>
-	Submissions (page {data.page})
+	Submissions (page {data.page}/{pages})
 	{#if $tainted}
 		<DataTransferDownIcon/>
 	{/if}
@@ -53,7 +64,9 @@
 	{#if data.page > 1}
 		<a href={`?page=${data.page-1}`}>Previous page</a>
 	{/if}
-	<a href={`?page=${data.page+1}`}>Next page</a>
+	{#if data.page < pages}
+		<a href={`?page=${data.page+1}`}>Next page</a>
+	{/if}
 </p>
 <form method="POST" use:enhance>
 	<div>

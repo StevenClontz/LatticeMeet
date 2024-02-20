@@ -48,7 +48,6 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.in(`registration_option_id`, registration_options.map(ro=>ro.id))
 		.order('created_at', {ascending: false})
-		.range((page-1)*5,(page-1)*5+4)
 	
 	if (registrations === null) {
 		console.log(regError)
@@ -56,11 +55,11 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	}
 
 	const form = await superValidate(
-		{ registrations },
+		{ registrations: registrations.slice((page-1)*5,page*5) },
 		registrationWorksheetSchema
 	);
 
-	return { form, collection, registration_options, page }
+	return { form, collection, registrations, registration_options, page }
 }
 
 export const actions = {

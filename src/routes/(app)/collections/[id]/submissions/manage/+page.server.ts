@@ -39,7 +39,6 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 		`)
 		.eq(`collection_id`, params.id)
 		.order('created_at', { ascending: false })
-		.range((page-1)*5,(page-1)*5+4)
 			
 	if (submissions === null) {
 		console.log(subError)
@@ -47,11 +46,11 @@ export const load = async ({ locals: { supabase, getSession, getProfile }, param
 	}
 
 	const form = await superValidate(
-		{ submissions },
+		{ submissions: submissions.slice((page-1)*5,page*5) },
 		submissionWorksheetSchema
 	);
 
-	return { form, collection, page }
+	return { form, collection, submissions, page }
 }
 
 export const actions = {

@@ -12,8 +12,9 @@
 	});
     import { DataTransferDownIcon } from '@indaco/svelte-iconoir/data-transfer-down';
 	import Gravatar from '$lib/Gravatar.svelte';
-	$: emails = $form.registrations
+	$: emails = data.registrations
 		.map(s=>s.full_profiles?.email).join(", ")
+	$: pages = Math.floor((data.registrations.length-1)/5)+1
 </script>
 
 <p>
@@ -27,11 +28,11 @@
 	Manage Registrations for {data.collection.short_title}: {data.collection.title}
 </h2>
 
-<h3>Emails for registrations</h3>
+<h3>Emails for all {data.registrations.length} registrants</h3>
 <textarea readonly style="width:100%">{emails}</textarea>
 
 <h3>
-	Registrations (page {data.page})
+	Registrations (page {data.page}/{pages})
 	{#if $tainted}
 		<DataTransferDownIcon/>
 	{/if}
@@ -40,7 +41,9 @@
 	{#if data.page > 1}
 		<a href={`?page=${data.page-1}`}>Previous page</a>
 	{/if}
-	<a href={`?page=${data.page+1}`}>Next page</a>
+	{#if data.page < pages}
+		<a href={`?page=${data.page+1}`}>Next page</a>
+	{/if}
 </p>
 <form method="POST" use:enhance>
 	<div>

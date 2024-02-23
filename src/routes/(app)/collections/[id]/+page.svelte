@@ -88,11 +88,6 @@
 				<Markdown md={existingSubmission.abstract || ""} {plugins}/>
 			</div>
 		</article>
-		<p>
-			<small>
-				<a href={`/submissions/${existingSubmission.id}/edit`}>[Edit submission]</a>
-			</small>
-		</p>
 	{/if}
 
 	{#if isAdmin}

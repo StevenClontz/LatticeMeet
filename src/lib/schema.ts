@@ -17,6 +17,9 @@ export const submissionSchema = z.object({
     last_name: z.string().min(1).trim(),
     website: z.string().url().nullable(),
     affiliation: z.string().nullable(),
+    collection_id: z.string().nullable(),
+    profile_id: z.string().nullable(),
+    id: z.string().nullable(),
 }).required({
     abstract: true,
     title: true,

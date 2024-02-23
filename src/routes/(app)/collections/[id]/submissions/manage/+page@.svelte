@@ -79,6 +79,7 @@
 					<th>Affiliation</th>
 					<th>Profile Approval</th>
 					<th>Submission Status</th>
+					<th>Edit Link</th>
 					<th>Submitted On</th>
 				</tr>
 			</thead>
@@ -128,6 +129,9 @@
 									<span title="Unsaved changes"><DataTransferDownIcon/></span>
 								{/if}
 							{/if}
+						</td>
+						<td style="font-size:0.8em">
+							<a href={`/submissions/${submission.id}/edit`}>[Edit]</a>
 						</td>
 						<td style="font-size:0.8em">
 							{new Date(submission.created_at).toLocaleDateString()}

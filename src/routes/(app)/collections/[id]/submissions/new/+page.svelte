@@ -11,7 +11,7 @@
 	const { form, errors, constraints } = superForm(data.form);
 
 	const handleSubmit = (e:Event) => {
-		if (!confirm("Do you want to submit? (Submissions cannot be edited later.)")) {
+		if (!confirm("Do you want to submit?")) {
 			e.preventDefault();
 		}
 	}

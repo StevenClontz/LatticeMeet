@@ -21,14 +21,17 @@ export const load = async ({ locals: { supabase }, params }) => {
 		`)
 		.eq(`collection_id`, params.id)
 		.eq(`submissions_status.status`,`accepted`)
-		.order('created_at', { ascending: false })
 			
 	if (submissions === null) {
 		console.log(subError)
 		error(500, "Submissions could not be loaded from server. Please try again.");
 	}
 
-	const submissionMds = submissions.map((s) => {
+	const submissionMds = submissions.sort((a, b) => {
+		const result = (a.full_profiles?.last_name || "").localeCompare(b.full_profiles?.last_name || "");
+
+		return result !== 0 ? result : (a.full_profiles?.first_name || "").localeCompare(b.full_profiles?.first_name || "");
+	  }).map((s) => {
 		return `
 **${s.full_profiles?.first_name?.trim()} ${s.full_profiles?.last_name?.trim()}**.
 ${s.full_profiles?.affiliation?.trim()}.

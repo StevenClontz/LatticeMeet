@@ -8,3 +8,22 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, 
     margin-top: 0
 }
 body {padding:18px}
+@media (max-width: 1024px) {
+    table tr {
+        border-bottom: 1px solid black;
+    }
+}
+@media (min-width: 1025px) {
+    table td {
+        border-bottom: 1px solid black;
+    }
+}
+tr.submitted {
+    background-color: #eeffee;
+}
+tr.accepted {
+    background-color: inherit;
+}
+tr.declined {
+    background-color: #888888;
+}

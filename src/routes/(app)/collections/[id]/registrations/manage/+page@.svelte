@@ -123,16 +123,3 @@
 {#if dev}
 	<SuperDebug data={$form} />
 {/if}
-
-<style>
-	@media (max-width: 1024px) {
-		table tr {
-			border-bottom: 1px solid black;
-		}
-	}
-	@media (min-width: 1025px) {
-		table td {
-			border-bottom: 1px solid black;
-		}
-	}
-</style>

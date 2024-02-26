@@ -12,6 +12,9 @@
 	<small>
 		[<a style="color:#444444" href={`/collections/${data.collection.id}`}>
 		Go back to {data.collection.short_title}</a>]
+
+		[<a style="color:#444444" href={`/collections/${data.collection.id}/submissions/manage`}>
+		Manage submissions</a>]
 	</small>
 </p>
 
@@ -21,6 +24,10 @@
 
 <h3>Markdown source:</h3>
 <textarea readonly style="width:100%">{data.markdown}</textarea>
+
+<p style="color:#0a0">
+	Tool to convert Markdown to LaTeX: <a href="https://pandoc.org/try/" target="_blank">https://pandoc.org/try/</a>
+</p>
 
 <h3>
 	Preview:

@@ -30,6 +30,9 @@
 	<small>
 		[<a style="color:#444444" href={`/collections/${data.collection.id}`}>
 		Go back to {data.collection.short_title}</a>]
+		
+		[<a style="color:#444444" href={`/collections/${data.collection.id}/submissions/markdown`}>
+		Export accepted submissions as Markdown</a>]
 	</small>
 </p>
 

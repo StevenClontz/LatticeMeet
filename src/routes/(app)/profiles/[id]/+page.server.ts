@@ -17,7 +17,12 @@ export const load = async ({ locals: { supabase, getProfile  }, params }) => {
 		.select()
 		.eq(`profile_id`, params.id)
 
+	const { data: registrations } = await supabase
+		.from('registrations')
+		.select('registration_options(title, collections(id, title))')
+		.eq(`profile_id`, params.id)
+
 	const userProfile = await getProfile()
 
-	return { profile, submissions, userProfile }
+	return { profile, submissions, registrations, userProfile }
 }

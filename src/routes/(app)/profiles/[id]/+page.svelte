@@ -3,7 +3,7 @@
     import { UserBadgeCheckIcon } from '@indaco/svelte-iconoir/user-badge-check'
   	import Gravatar from '$lib/Gravatar.svelte'
 	export let data
-	const {submissions, profile, userProfile } = data
+	const {submissions, registrations, profile, userProfile } = data
 </script>
 
 <div style="display:inline-block;float:right">
@@ -46,6 +46,20 @@
 			<a href={`/collections/${submission.collection_id}`}>
 				{submission.title}
 			</a>
+		</li>
+	{/each}
+</ul>
+{/if}
+
+{#if registrations && registrations.length > 0}
+<h3>Registrations</h3>
+<ul>
+	{#each registrations as registration}
+		<li>
+			<a href={`/collections/${registration.registration_options?.collections?.id}`}>
+				{registration.registration_options?.collections?.title}
+			</a>:
+			{registration.registration_options?.title}
 		</li>
 	{/each}
 </ul>

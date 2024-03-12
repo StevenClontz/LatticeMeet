@@ -15,6 +15,19 @@
 	$: emails = data.registrations
 		.map(s=>s.full_profiles?.email).join(", ")
 	$: pages = Math.floor((data.registrations.length-1)/5)+1
+
+	import { mkConfig, generateCsv, download } from "export-to-csv";
+	const csvConfig = mkConfig({ useKeysAsHeaders: true });
+	$: csv = generateCsv(csvConfig)(data.registrations.map(r=>{
+		return {
+			firstName: r.full_profiles?.first_name,
+			lastName: r.full_profiles?.last_name,
+			email: r.full_profiles?.email,
+			verified: r.full_profiles?.verified,
+			registrationOption: r.registration_options?.title,
+			registeredOn: r.created_at
+		}
+	}));
 </script>
 
 <p>
@@ -30,6 +43,8 @@
 
 <h3>Emails for all {data.registrations.length} registrants</h3>
 <textarea readonly style="width:100%">{emails}</textarea>
+
+<button on:click={() => download(csvConfig)(csv)}>Download CSV</button>
 
 <h3>
 	Registrations (page {data.page}/{pages})

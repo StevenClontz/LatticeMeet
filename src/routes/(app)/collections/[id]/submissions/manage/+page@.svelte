@@ -24,6 +24,20 @@
 	$: emailsAll = data.submissions
 		.map(s=>s.full_profiles?.email).join(", ")
 	$: pages = Math.floor((data.submissions.length-1)/5)+1
+
+	import { mkConfig, generateCsv, download } from "export-to-csv";
+	const csvConfig = mkConfig({ useKeysAsHeaders: true });
+	$: csv = generateCsv(csvConfig)(data.submissions.map(s=>{
+		return {
+			firstName: s.full_profiles?.first_name,
+			lastName: s.full_profiles?.last_name,
+			email: s.full_profiles?.email,
+			verified: s.full_profiles?.verified,
+			submittedOn: s.created_at,
+			title: s.title,
+			abstract: s.abstract,
+		}
+	}));
 </script>
 
 <p>
@@ -55,6 +69,8 @@
 <textarea readonly style="width:100%">{emails}</textarea>
 {/if}
 
+
+<button on:click={() => download(csvConfig)(csv)}>Download CSV</button>
 
 
 <h3>

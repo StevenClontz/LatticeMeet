@@ -2,6 +2,10 @@
 	import appTitle from "$lib/appTitle";
 </script>
 
+<p><strong>Looking for ScholarLattice in 2025?</strong> Visit <a href="https://preview.scholarlattice.org">Preview.ScholarLattice.org</a>.</p>
+
+<hr/>
+
 <p>
 	<strong>What's this?</strong>
 	{appTitle} is an upcoming 
